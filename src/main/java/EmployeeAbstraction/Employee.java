@@ -21,7 +21,7 @@ import java.util.*;
 /*? Declaraciones de Clase y XML*/
 @XmlRootElement(name = "Employee")
 @XmlType(propOrder = {"m_nombreEmployee", "m_apellidoEmployee","m_codigoEmployee", "m_fechaContratacionEmployee", "m_sueldoEmployee", "m_DesgloceSalarioEmployee"
-,"m_DateEnNumero"})
+,"m_DateEnNumero" })
 @XmlSeeAlso({Manager.class})
 public class Employee implements Comparator<Employee>, Comparable<Employee>, Serializable {
 
@@ -52,14 +52,14 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
     /**
      * String representativa de la fecha de contratacion del Empleado a Registrar.
      */
-    @XmlElement(name = "DateHired")
+
     private String m_fechaContratacionEmployee;
 
     /**
      * Float representativa del sueldo del Empleado a Registrar. El valor del sueldo debe estar en el
      * intervalo cerrado de [800,3500].
      */
-    @XmlElement(name = "SalaryEmployee")
+
     private Float m_sueldoEmployee;
 
     /**
@@ -71,7 +71,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
     /**
      * Long representativa de la fecha en format numerico estandar del Empleado a Registrar.
      */
-    @XmlElement(name = "DateNumericFormat")
+
     private Long m_DateEnNumero;
 
     /**
@@ -270,7 +270,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * es menor a Long.MIN_VALUE, mayor a Long.MAX_VALUE, o no cae dentro del intervalo permitido de fechas..
      * La excepcion lleva un mensaje detallando el motivo y el valor proporcionado que causo el error.
      */
-    public boolean setM_fechaContratacionEmployee(long e_FechaContratacionEmpleado) throws InvalidAttributeValueException {
+    public boolean setM_fechaContratacionEmployee(Long e_FechaContratacionEmpleado) throws InvalidAttributeValueException {
 
         if (Long.MIN_VALUE < e_FechaContratacionEmpleado && e_FechaContratacionEmpleado < Long.MAX_VALUE)
         {
@@ -284,7 +284,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         }
         else
         {
-            throw (this.InvalidAttributeGenerator("setM_fechaContratacionEmployee", String.valueOf(e_FechaContratacionEmpleado)));
+            throw (InvalidAttributeGenerator("setM_fechaContratacionEmployee", String.valueOf(e_FechaContratacionEmpleado)));
         }
         return false;
     }
@@ -295,7 +295,8 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * @return Un {@code String} que representa la fecha de contratacion del empleado. Esta fecha fue configurada durante la instanciacion del objeto.
      * Si la fecha de contratacion del empleado no fue establecida previamente, este metodo puede retornar null.
      */
-    public String getM_fechaContratacionEmployee() {return Employee.this.m_fechaContratacionEmployee;}
+    @XmlElement(name = "DateHired")
+    public Long getM_fechaContratacionEmployee() {return Employee.this.m_DateEnNumero;}
 
 
 
@@ -320,7 +321,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * es menor a 800 o mayor a 3500. La excepcion contiene un mensaje detallando
      * el motivo y el valor proporcionado que causo el error.
      */
-    public boolean setM_sueldoEmployee(float e_SueldoEmpleado) throws InvalidAttributeValueException {
+    public boolean setM_sueldoEmployee(Float e_SueldoEmpleado) throws InvalidAttributeValueException {
 
         if (e_SueldoEmpleado >= 800 && e_SueldoEmpleado <= 3500)
         {
@@ -329,7 +330,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         }
         else
         {
-            throw (this.InvalidAttributeGenerator("setM_sueldoEmployee", String.valueOf(e_SueldoEmpleado)));
+            throw (InvalidAttributeGenerator("setM_sueldoEmployee", String.valueOf(e_SueldoEmpleado)));
         }
     }
 
@@ -344,6 +345,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * @return Un {@code float} que representa el sueldo del empleado. Este sueldo fue configurado durante la instanciacion del objeto.
      * Si el sueldo del empleado no fue establecido previamente, este metodo puede retornar null.
      */
+    @XmlElement(name = "SalaryEmployee")
     public Float getM_sueldoEmployee() {return Employee.this.m_sueldoEmployee;}
 
 
@@ -395,6 +397,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * Esta fecha se configuro durante la creacion de la instancia del objeto empleado. Si la fecha de contratacion no fue establecida previamente, este metodo puede retornar null.
      */
     //? Metodo get Para Long value de fecha de contratacion
+    @XmlElement(name = "DateNumericFormat")
     public Long getM_DateEnNumero() {return Employee.this.m_DateEnNumero;}
 
 

@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @XmlRootElement(name = "Manager")
-@XmlType(propOrder = {"m_TituloNivelManager, m_ComisionManager"})
+@XmlType(propOrder ={"m_TituloNivelManager","m_ComisionManager"})
 public class Manager extends Employee implements Serializable {
 
     /**
@@ -101,7 +101,7 @@ public class Manager extends Employee implements Serializable {
      * @return Un {@code boolean} que indica si la comision fue configurada correctamente.
      * @throws InvalidAttributeValueException si el valor proporcionado no esta en el intervalo abierto de (0,5000].
      */
-    public boolean setM_ComisionManager(float e_ComisionManager) throws InvalidAttributeValueException {
+    public boolean setM_ComisionManager(Float e_ComisionManager) throws InvalidAttributeValueException {
 
         if (e_ComisionManager > 0 && e_ComisionManager <= 5000)
         {
