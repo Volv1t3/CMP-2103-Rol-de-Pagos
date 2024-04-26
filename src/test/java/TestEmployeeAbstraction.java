@@ -41,7 +41,7 @@ public class TestEmployeeAbstraction {
             {
                 System.out.println("Employee Map Entry: " + employee.getM_MapEntry("DecimoTercero"));
             }
-            System.out.println(employee.toString());
+            System.out.println(employee);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

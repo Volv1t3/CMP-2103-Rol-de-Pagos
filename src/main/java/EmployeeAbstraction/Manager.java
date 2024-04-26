@@ -35,6 +35,7 @@ public class Manager extends Employee implements Serializable {
      * Este constructor no toma argumentos y se utiliza principalmente para la inicializacion de objetos con JAXB.
      * Llama explícitamente al constructor de la clase base Employee.
      */
+    @SuppressWarnings("unused")
     public Manager(){super();}
 
     //? Constructor Con Cinco Argumentos para JAXB
@@ -72,6 +73,7 @@ public class Manager extends Employee implements Serializable {
      * @throws InvalidAttributeValueException si el String proporcionado esta vacio.
      *
      */
+
     public boolean setM_TituloNivelManager(String e_TituloNivelManager) throws InvalidAttributeValueException {
 
         if (!(e_TituloNivelManager.isEmpty()))
@@ -113,12 +115,8 @@ public class Manager extends Employee implements Serializable {
     /**
      * Esta funcion devuelve la comision del objeto Manager.
      * <br><br>
-     * Esta funcion no requiere ningun aporte, ya que solo se trata de un getter que devuelve un valor preexistente.
-     * Internamente, esta llamando al constructor de la clase Employee para obtener la informacion del objeto Manager instanciado.
-     * Puede lanzar InvalidAttributeValueException si el atributo m_ComisionManager de Manager contiene un valor no valido.
-     *<br><br>
+     *
      * @return Un {@code float} que representa la comision del Manager registrado.
-     * @throws InvalidAttributeValueException si m_ComisionManager tiene un valor no valido.
      */
     @XmlElement(name = "ComisionManager")
     public Float getM_ComisionManager() {return this.m_ComisionManager;}
@@ -171,7 +169,7 @@ public class Manager extends Employee implements Serializable {
     public String toString() {
 
         String newManagerRep = String.format("['Titulo Manager: %s;\t'Bono Manager': %s;\t",
-                this.getM_TituloNivelManager(), String.valueOf(this.getM_ComisionManager()));
+                this.getM_TituloNivelManager(), this.getM_ComisionManager());
         return newManagerRep + super.toString().replace('[', ' ');
     }
 }

@@ -79,13 +79,13 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * <br> Valor ajustado a 1.º de Enero de 1970
       */
     @XmlTransient
-    private static Date minHiringDate = Date.from(Instant.EPOCH);
+    private static final Date minHiringDate = Date.from(Instant.EPOCH);
 
     /**
      * Instancia de la clase Date representativa de la maxima fecha admisible dentro del programa para fecha de contratacion
      */
     @XmlTransient
-    private static Date maxHiringDate = Date.from(Instant.now());
+    private static final Date maxHiringDate = Date.from(Instant.now());
 
 
     /*? Metodos Publicos de la Clase */
@@ -110,7 +110,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * @param e_FechaContratacionEmpleado Un objeto {@code Date} que representa la fecha en que se contrató al empleado.
      * @param e_sueldoEmpleado Un {@code float} que representa el salario del empleado. El valor del salario debe estar en el intervalo cerrado de [800,3500].
      *
-     * @throws InvalidAttributesException si alguna de las entradas no cumple con los criterios especificados.
+     * @throws InvalidAttributeValueException si alguna de las entradas no cumple con los criterios especificados.
      */
     public Employee(String e_NombreEmpleado, String e_ApellidoEmpleado, int e_CodigoEmpleado, long e_FechaContratacionEmpleado,
                     float e_sueldoEmpleado) throws InvalidAttributeValueException {
@@ -196,7 +196,6 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
     }
     /**
      * Obtiene el apellido del empleado.
-     *
      * Este es un método de JAXB Bean que permite la extracción de apellidos de empleados de una instancia de Employee.
      *
      * @return Un {@code String} que representa el apellido del empleado, que se configuró durante su instanciacion.
@@ -215,7 +214,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * @param e_CodigoEmpleado Un {@code int} que representa el codigo unico del empleado.
      * Este valor no puede ser menor o igual a cero. Si el valor proporcionado es menor o igual a cero, la funcion
      * lanza una excepcion de InvalidAttributeValueException.
-     *
+
      * Escenarios probables de excepcion:
      * - Si se proporciona un valor igual o menor a cero para e_CodigoEmpleado.
      *
@@ -235,13 +234,13 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         }
         else
         {
-            throw (this.InvalidAttributeGenerator("setM_codigoEmployee", String.valueOf(e_CodigoEmpleado)));
+            throw (InvalidAttributeGenerator("setM_codigoEmployee", String.valueOf(e_CodigoEmpleado)));
         }
     }
 
     /**
      * Obtiene el codigo unico del empleado.
-     *
+
      * Este es un metodo de jaxb bean que permite la extraccion del codigo del empleado de una instancia del objeto employee.
      *
      * @return un entero que representa el codigo unico del empleado, este valor fue configurado durante la instanciacion del objeto.
@@ -292,7 +291,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * Obtiene la fecha de contratacion del empleado.
      * Este es un método de JAXB Bean que permite la extracción de la fecha de contratacion de una instancia del objeto empleado.
      *
-     * @return Un {@code String} que representa la fecha de contratacion del empleado. Esta fecha fue configurada durante la instanciacion del objeto.
+     * @return Un {@code Long} que representa la fecha de contratacion del empleado. Esta fecha fue configurada durante la instanciacion del objeto.
      * Si la fecha de contratacion del empleado no fue establecida previamente, este metodo puede retornar null.
      */
     @XmlElement(name = "DateHired")
@@ -336,9 +335,9 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
 
     /**
      * Este metodo obtiene el sueldo del empleado.
-     *
+
      * Este es un metodo de JAXB Bean que permite la extraccion del sueldo de una instancia del objeto empleado.
-     *
+
      * Posibles casos donde se podria lanzar una excepcion:
      * - Si el sueldo del empleado no fue establecido previamente, este metodo puede retornar null, lo cual puede causar una NullPointerException si no se maneja adecuadamente.
      *
