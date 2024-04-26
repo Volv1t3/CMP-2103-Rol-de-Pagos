@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="" />
+    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/CustomExceptions/FileIsEmptyAlert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CustomExceptions/FileNotFoundAlert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CustomExceptions/IncorrectCSVFormat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -69,6 +79,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.TestCSVFormatting.executor": "Run",
+    "Application.TestEmployeeAbstraction.executor": "Run",
     "JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar.executor": "Run",
     "Java Scratch.Scratch.executor": "Run",
     "Maven.RolDePagosMain [deploy].executor": "Run",
@@ -76,7 +88,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Development",
+    "git-widget-placeholder": "DevelopmentBranch",
     "go.import.settings.migrated": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -97,7 +109,21 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Java Scratch.Scratch">
+  <component name="RunManager" selected="Application.TestCSVFormatting">
+    <configuration name="TestCSVFormatting" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestCSVFormatting" />
+      <module name="RolDePagosMain" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestEmployeeAbstraction" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestEmployeeAbstraction" />
+      <module name="RolDePagosMain" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RolDePagosMain-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/target/RolDePagosMain-1.0-SNAPSHOT.jar" />
       <method v="2" />
@@ -111,6 +137,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestCSVFormatting" />
+        <item itemvalue="Application.TestEmployeeAbstraction" />
         <item itemvalue="Java Scratch.Scratch" />
         <item itemvalue="JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar" />
       </list>
@@ -135,6 +163,7 @@
       <workItem from="1714003646660" duration="117000" />
       <workItem from="1714003796096" duration="3075000" />
       <workItem from="1714006930849" duration="11477000" />
+      <workItem from="1714096658845" duration="9717000" />
     </task>
     <task id="LOCAL-00001" summary="[Commit #1] [Santiago Arellano] [main Branch]&#10;&#10;Included All Work Folders, Class, File Structures, Headers, And Maven Dependencies">
       <option name="closed" value="true" />

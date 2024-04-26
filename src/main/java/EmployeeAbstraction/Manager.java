@@ -172,4 +172,15 @@ public class Manager extends Employee implements Serializable {
                 this.getM_TituloNivelManager(), this.getM_ComisionManager());
         return newManagerRep + super.toString().replace('[', ' ');
     }
+
+    //? Implementamos un overwrite del metodo para serializacion CSV
+
+    @Override
+    public String toCSVString() {
+        String originalEmployee = super.toCSVString();
+        StringBuilder additionalString = new StringBuilder(originalEmployee);
+        additionalString.append(",").append(this.getM_TituloNivelManager()).append(",");
+        additionalString.append(this.getM_ComisionManager());
+        return additionalString.toString();
+    }
 }

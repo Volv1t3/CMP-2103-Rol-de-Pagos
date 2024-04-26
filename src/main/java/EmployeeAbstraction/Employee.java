@@ -514,4 +514,28 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         //! Paso inductivo: usamos el compareTo robusto de Float, evitamos implementacion propia
         return Objects.compare(this.getM_sueldoEmployee(), other.getM_sueldoEmployee(), Float::compareTo);
     }
+
+    //? Implementation of a  CSV Serialization Method
+    /**
+     * Este metodo implementa una representacion de serializacion CSV de los campos internos del objeto.
+     * <br> Se utiliza un StringBuilder para concatenar los campos del objeto, siguiendo este orden:
+     * <code> 'm_nombreEmployee', 'm_apellidoEmployee', 'm_codigoEmployee', 'm_fechaContratacionEmployee',
+     * 'm_sueldoEmployee', y 'm_DesgloceSalarioEmployee'. </code> Cada campo es seguido por una coma.
+     *
+     * @return Un string que representa al objeto Employee en formato CSV.
+     * Este string incluye representaciones de los campos internos del objeto, concatenados con comas.
+     */
+    public String toCSVString()
+
+    {
+        //? First Create a String Builder
+        StringBuilder CSVrepresentation = new StringBuilder();
+        CSVrepresentation.append(this.getM_nombreEmployee()).append(",");
+        CSVrepresentation.append(this.getM_apellidoEmployee()).append(",");
+        CSVrepresentation.append(this.getM_codigoEmployee()).append(",");
+        CSVrepresentation.append(this.getM_fechaContratacionEmployee()).append(",");
+        CSVrepresentation.append(this.getM_sueldoEmployee()).append(",");
+        CSVrepresentation.append(this.m_DesgloceSalarioEmployee.toString());
+        return CSVrepresentation.toString();
+    }
 }
