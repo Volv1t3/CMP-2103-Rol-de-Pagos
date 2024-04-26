@@ -10,10 +10,8 @@ package EmployeeAbstraction;
 /*? Directivas de Preprocesamiento*/
 import javax.naming.directory.InvalidAttributeValueException;
 import javax.naming.directory.InvalidAttributesException;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -22,11 +20,13 @@ import java.util.*;
 
 /*? Declaraciones de Clase y XML*/
 @XmlRootElement(name = "Employee")
-@XmlType(propOrder = {"NameEmployee", "LNameEmployee","IDEmployee", "DateHired", "SalaryEmployee", "DesgloceSalarial"
-,"DateNumericFormat", ""})
-public class Employee implements Comparator<Employee>, Comparable<Employee> {
+@XmlType(propOrder = {"m_nombreEmployee", "m_apellidoEmployee","m_codigoEmployee", "m_fechaContratacionEmployee", "m_sueldoEmployee", "m_DesgloceSalarioEmployee"
+,"m_DateEnNumero"})
+@XmlSeeAlso({Manager.class})
+public class Employee implements Comparator<Employee>, Comparable<Employee>, Serializable {
 
-    private InvalidAttributeValueException InvalidAttributeGenerator(String ErrorFunctionName, String ErrorValue)
+
+    public static InvalidAttributeValueException InvalidAttributeGenerator(String ErrorFunctionName, String ErrorValue)
     {
         return new InvalidAttributeValueException(String.format("Error Code 0x0001 - [Raised] - El valor enviado a la funcion" +
                 "%10s, es incorrecto {Valor ingresado: %10s}. Referirse a la documentacion.", ErrorFunctionName, ErrorValue));
@@ -36,19 +36,17 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
     /**
      * String representativa del nombre del Empleado a Registrar.
      * */
-    @XmlElement(name = "NameEmployee")
     private String m_nombreEmployee;
 
     /**
      * String representativa del apellido del Empleado a Registrar.
      */
-    @XmlElement(name = "LNameEmployee")
     private String m_apellidoEmployee;
 
     /**
      * Integer representativa del codigo del Empleado a Registrar.
      */
-    @XmlElement(name = "IDEmployee")
+
     private Integer m_codigoEmployee;
 
     /**
@@ -115,7 +113,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
      * @throws InvalidAttributesException si alguna de las entradas no cumple con los criterios especificados.
      */
     public Employee(String e_NombreEmpleado, String e_ApellidoEmpleado, int e_CodigoEmpleado, long e_FechaContratacionEmpleado,
-                    float e_sueldoEmpleado) throws InvalidAttributesException, InvalidAttributeValueException {
+                    float e_sueldoEmpleado) throws InvalidAttributeValueException {
         this.setM_nombreEmployee(e_NombreEmpleado);
         this.setM_apellidoEmployee(e_ApellidoEmpleado);
         this.setM_codigoEmployee(e_CodigoEmpleado);
@@ -149,7 +147,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
         }
         else
         {
-            throw (this.InvalidAttributeGenerator("setM_nombreEmployee", e_NombreEmpleado));
+            throw (InvalidAttributeGenerator("setM_nombreEmployee", e_NombreEmpleado));
         }
     }
 
@@ -161,7 +159,8 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
      * @return Un {@code String} que representa el nombre del empleado puesto que la administración de empleados fue configurada durante su instanciacion.
      * puede retornar Null si el nombre del empleado no fue establecido previamente.
      */
-    public String getM_nombreEmployee() {return Employee.this.m_nombreEmployee;}
+    @XmlElement(name = "NameEmployee")
+    public String getM_nombreEmployee() {return this.m_nombreEmployee;}
 
     // ? Setters y Getters Para Apellido Empleado Usando Beans Syntax Requirements Por JAXB
 
@@ -192,7 +191,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
         }
         else
         {
-            throw (this.InvalidAttributeGenerator("setM_apellidoEmployee", e_ApellidoEmpleado));
+            throw (InvalidAttributeGenerator("setM_apellidoEmployee", e_ApellidoEmpleado));
         }
     }
     /**
@@ -203,6 +202,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
      * @return Un {@code String} que representa el apellido del empleado, que se configuró durante su instanciacion.
      * Puede retornar null en caso de que el apellido del empleado no haya sido previamente establecido.
      */
+    @XmlElement(name = "LNameEmployee")
     public String getM_apellidoEmployee() {return Employee.this.m_apellidoEmployee;}
 
 
@@ -247,6 +247,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
      * @return un entero que representa el codigo unico del empleado, este valor fue configurado durante la instanciacion del objeto.
      * si el codigo del empleado no fue establecido previamente, este metodo puede retornar null.
      */
+    @XmlElement(name = "IDEmployee")
     public int getM_codigoEmployee() {return Employee.this.m_codigoEmployee;}
 
 
@@ -274,7 +275,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
         if (Long.MIN_VALUE < e_FechaContratacionEmpleado && e_FechaContratacionEmpleado < Long.MAX_VALUE)
         {
             Date internalDate = new Date(e_FechaContratacionEmpleado);
-            if (!internalDate.before(minHiringDate) && !internalDate.after(maxHiringDate))
+            if (!internalDate.before(minHiringDate))
             {
                 this.m_fechaContratacionEmployee = new SimpleDateFormat("dd/MM/yyy HH:mm:ss").format(internalDate);
                 this.m_DateEnNumero = e_FechaContratacionEmpleado;
@@ -376,6 +377,14 @@ public class Employee implements Comparator<Employee>, Comparable<Employee> {
             return false;
         }
     }
+    public BigDecimal getM_MapEntry(String e_Key)
+    {
+        return this.m_DesgloceSalarioEmployee.get(e_Key);
+    }
+
+
+    //? Setters y Getters Para Fecha de Contratacion Empleado Usando Beans Syntax Requirements Por JAXB
+
 
     /**
      * Este metodo obtiene la representacion numerica de la fecha de contratacion del empleado.
