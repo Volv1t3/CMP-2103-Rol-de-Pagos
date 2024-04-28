@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -437,7 +438,7 @@ public class RolDePagosView extends Application {
                                 break;
                             }
                             case "Titulo Tercer Nivel": {
-                                dummyManager.setM_TituloNivelManager("Titulo Tercer Nivel");
+                                dummyManager.setM_TituloNivelManager("TercerNivel");
                                 break;
                             }
                         }
@@ -500,7 +501,292 @@ public class RolDePagosView extends Application {
                         this.mListVIewColaboradoresManagers.refresh();
                     }
                 }
+                if (this.mColaboradorRadioButton.isSelected() && !(this.mListViewColaboradores.getSelectionModel().isEmpty()))
+                {
+                    //! Si el modelo de seleccion no esta vacio, tenemos que usar exactamente el mismo metodo anterior solo que para reemplzar esa seleccion.
+                    Employee toModify = this.mListViewColaboradores.getSelectionModel().getSelectedItem();
+                    //! Agarramos primero el nombre
+                    if (!(this.mColaboradorNameTextField.getText().isEmpty())) {
+                        try {
+                            toModify.setM_nombreEmployee(this.mColaboradorNameTextField.getText());
+                        } catch (InvalidAttributeValueException e) {
+                            this.generalAlert.setTitle("Nombre Invalido");
+                            this.generalAlert.setHeaderText("El nombre ingresado no es valido");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar solo un nombre por empleado.");
+                            this.mColaboradorNameTextField.clear();
+                            this.generalAlert.showAndWait();
+                            error_Flag = true;
+                        }
+                        catch (NullPointerException e)
+                        {
+                            this.generalAlert.setTitle("Campo Vacio");
+                            this.generalAlert.setHeaderText("El campo nombre esta vacio");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un nombre por empleado.");
+                            error_Flag = true;
+                            this.generalAlert.showAndWait();
+                        }
+                    } else {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo nombre esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un nombre por empleado.");
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    }
+                    //! Agarramos el Apellido
+                    if (!(this.mColaboradorApellidoTextField.getText().isEmpty())) {
+                        try {
+                            toModify.setM_apellidoEmployee(this.mColaboradorApellidoTextField.getText());
+                        } catch (InvalidAttributeValueException e) {
+                            this.generalAlert.setTitle("Apellido Invalido");
+                            this.generalAlert.setHeaderText("El apellido ingresado no es valido");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar solo un apellido por empleado.");
+                            this.mColaboradorApellidoTextField.clear();
+                            this.generalAlert.showAndWait();
+                            error_Flag = true;
+                        }
+                        catch (NullPointerException e)
+                        {
+                            this.generalAlert.setTitle("Campo Vacio");
+                            this.generalAlert.setHeaderText("El campo apellido esta vacio");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un apellido por empleado.");
+                            error_Flag = true;
+                            this.generalAlert.showAndWait();
+                        }
+                    } else {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo apellido esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un apellido por empleado.");
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    }
+                    //! Revisamos Selector de Fechas
+                    try {
+                        toModify.setM_fechaContratacionEmployee(Date.valueOf(this.mColaboradorFechaContratoDatePicker.getValue()).getTime());
 
+                    } catch (InvalidAttributeValueException e) {
+                        this.generalAlert.setTitle("Fecha Invalida");
+                        this.generalAlert.setHeaderText("La fecha ingresada no es valida");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una fecha valida por empleado.");
+                        this.generalAlert.showAndWait();
+                        error_Flag = true;
+                    }
+                    catch (NullPointerException e)
+                    {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo fecha esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una fecha por empleado.");
+                        this.generalAlert.showAndWait();
+                        error_Flag = true;
+                    }
+
+                    if (!(this.mColaboradorSalarioTextField.getText().isEmpty())) {
+                        //! Convert to Float
+                        Float readInSalary = Float.parseFloat(this.mColaboradorSalarioTextField.getText());
+                        if (readInSalary < 800 || readInSalary > 3500) {
+                            this.generalAlert.setTitle("Salario Invalido");
+                            this.generalAlert.setHeaderText("El salario ingresado no es valido");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un salario entre 800 y 3500 por empleado.");
+                            this.mColaboradorSalarioTextField.clear();
+                            error_Flag = true;
+                            this.generalAlert.showAndWait();
+                        } else {
+                            try {
+                                toModify.setM_sueldoEmployee(readInSalary);
+                            } catch (InvalidAttributeValueException e) {
+                                this.generalAlert.setTitle("Salario Invalido");
+                                this.generalAlert.setHeaderText("El salario ingresado no es valido");
+                                this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un salario entre 800 y 3500 por empleado.");
+                                this.mColaboradorSalarioTextField.clear();
+                                error_Flag = true;
+                                this.generalAlert.showAndWait();
+                            }
+                        }
+
+                        this.mListViewColaboradores.refresh();
+                        this.mListVIewColaboradoresManagers.refresh();
+
+                    }
+
+                }
+                else if (this.mGerenteRadioButton.isSelected() && !(this.mListVIewColaboradoresManagers.getSelectionModel().isEmpty()))
+                {
+                    error_Flag = false;
+                    Manager toModify = (Manager) this.mListVIewColaboradoresManagers.getSelectionModel().getSelectedItem();
+                    //! Agarramos primero el nombre
+                    if (!(this.mColaboradorNameTextField.getText().isEmpty())) {
+                        try {
+                            toModify.setM_nombreEmployee(this.mColaboradorNameTextField.getText());
+                        } catch (InvalidAttributeValueException e) {
+                            this.generalAlert.setTitle("Nombre Invalido");
+                            this.generalAlert.setHeaderText("El nombre ingresado no es valido");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar solo un nombre por empleado.");
+                            this.mColaboradorNameTextField.clear();
+                            this.generalAlert.showAndWait();
+                            error_Flag = true;
+                        } catch (NullPointerException e) {
+                            this.generalAlert.setTitle("Campo Vacio");
+                            this.generalAlert.setHeaderText("El campo nombre esta vacio");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un nombre por empleado.");
+                            error_Flag = true;
+                            this.generalAlert.showAndWait();
+                        }
+                    } else {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo nombre esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un nombre por empleado.");
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    }
+                    //! Agarramos el Apellido
+                    if (!(this.mColaboradorApellidoTextField.getText().isEmpty())) {
+                        try {
+                            toModify.setM_apellidoEmployee(this.mColaboradorApellidoTextField.getText());
+                        } catch (InvalidAttributeValueException e) {
+                            this.generalAlert.setTitle("Apellido Invalido");
+                            this.generalAlert.setHeaderText("El apellido ingresado no es valido");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar solo un apellido por empleado.");
+                            this.mColaboradorApellidoTextField.clear();
+                            this.generalAlert.showAndWait();
+                            error_Flag = true;
+                        } catch (NullPointerException e) {
+                            this.generalAlert.setTitle("Campo Vacio");
+                            this.generalAlert.setHeaderText("El campo apellido esta vacio");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un apellido por empleado.");
+                            error_Flag = true;
+                            this.generalAlert.showAndWait();
+                        }
+                    } else {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo apellido esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un apellido por empleado.");
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    }
+                    //! Revisamos Selector de Fechas
+                    try {
+                        toModify.setM_fechaContratacionEmployee(Date.valueOf(this.mColaboradorFechaContratoDatePicker.getValue()).getTime());
+
+                    }
+                    catch (InvalidAttributeValueException e)
+                    {
+                        this.generalAlert.setTitle("Fecha Invalida");
+                        this.generalAlert.setHeaderText("La fecha ingresada no es valida");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una fecha valida por empleado.");
+                        this.generalAlert.showAndWait();
+                        error_Flag = true;
+                    }
+                    catch (NullPointerException e)
+                    {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo fecha esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una fecha por empleado.");
+                        this.generalAlert.showAndWait();
+                        error_Flag = true;
+                    }
+                    //! Agarramos EL salario
+                    if (!(this.mColaboradorSalarioTextField.getText().isEmpty())) {
+                        //! Convert to Float
+                        Float readInSalary = Float.parseFloat(this.mColaboradorSalarioTextField.getText());
+                        if (readInSalary < 800 || readInSalary > 3500) {
+                            this.generalAlert.setTitle("Salario Invalido");
+                            this.generalAlert.setHeaderText("El salario ingresado no es valido");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un salario entre 800 y 3500 por empleado.");
+                            this.mColaboradorSalarioTextField.clear();
+                            error_Flag = true;
+                            this.generalAlert.showAndWait();
+                        } else {
+                            try {
+                                toModify.setM_sueldoEmployee(readInSalary);
+                            } catch (InvalidAttributeValueException e) {
+                                this.generalAlert.setTitle("Salario Invalido");
+                                this.generalAlert.setHeaderText("El salario ingresado no es valido");
+                                this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un salario entre 800 y 3500 por empleado.");
+                                this.mColaboradorSalarioTextField.clear();
+                                error_Flag = true;
+                                this.generalAlert.showAndWait();
+                            }
+                        }
+                    }
+                    else {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo salario esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un salario por empleado.");
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    }
+                    //! Leemos El valor del Combo Box
+                    try {
+                        switch (this.mManagerTituloNivelComboBox.getSelectionModel().getSelectedItem()) {
+                            case "Maestria": {
+                                toModify.setM_TituloNivelManager("Maestria");
+                                break;
+                            }
+                            case "Doctorado": {
+                                toModify.setM_TituloNivelManager("Doctorado");
+                                break;
+                            }
+                            case "Titulo Tercer Nivel": {
+                                toModify.setM_TituloNivelManager("TercerNivel");
+                                break;
+                            }
+                        }
+                    } catch (InvalidAttributeValueException e) {
+                        this.generalAlert.setTitle("Titulo Invalido");
+                        this.generalAlert.setHeaderText("El titulo ingresado no es valido");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un titulo valido por empleado.");
+                        this.mManagerTituloNivelComboBox.getSelectionModel().clearSelection();
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    } catch (NullPointerException e) {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo titulo esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un titulo por empleado.");
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    }
+                    //! Recolectamos el Valor de Comision
+                    if (!(this.mManagerBonificacion.getText().isEmpty())) {
+                        Float value = Float.parseFloat(this.mManagerBonificacion.getText());
+                        if (value < 0 || value > 5000) {
+                            this.generalAlert.setTitle("Comision Invalida");
+                            this.generalAlert.setHeaderText("La comision ingresada no es valida");
+                            this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una comision entre 0 y 5000 por empleado.");
+                            this.mManagerBonificacion.clear();
+                            error_Flag = true;
+                            this.generalAlert.showAndWait();
+                        } else {
+                            try {
+                                toModify.setM_ComisionManager(value);
+                            } catch (InvalidAttributeValueException e) {
+                                this.generalAlert.setTitle("Comision Invalida");
+                                this.generalAlert.setHeaderText("La comision ingresada no es valida");
+                                this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una comision entre 0 y 5000 por empleado.");
+                                this.mManagerBonificacion.clear();
+                                error_Flag = true;
+                                this.generalAlert.showAndWait();
+                            } catch (NullPointerException e) {
+                                this.generalAlert.setTitle("Campo Vacio");
+                                this.generalAlert.setHeaderText("El campo comision esta vacio");
+                                this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una comision por empleado.");
+                                error_Flag = true;
+                                this.generalAlert.showAndWait();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.generalAlert.setTitle("Campo Vacio");
+                        this.generalAlert.setHeaderText("El campo comision esta vacio");
+                        this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una comision por empleado.");
+                        error_Flag = true;
+                        this.generalAlert.showAndWait();
+                    }
+
+                    if (!error_Flag) {
+                        this.mListVIewColaboradoresManagers.requestFocus();
+                        this.mListVIewColaboradoresManagers.refresh();
+                    }
+                }
         });
 
         //Connecting the method for deleting an employee into the Button
@@ -536,14 +822,84 @@ public class RolDePagosView extends Application {
             }
         });
 
-        //? Anadimos mouse movements
-        this.mListViewColaboradores.setOnMouseClicked(mouseClicked ->
+        //? Anadimos mouse movements para seleccion y deselecion de empleados
+        ArrayList<ListView<Employee>> collectionOfViews = new ArrayList<>();
+        Collections.addAll(collectionOfViews, this.mListViewColaboradores, this.mListVIewColaboradoresManagers);
+
+        collectionOfViews.forEach(consumerAction ->
         {
-            if (mouseClicked.getClickCount() == 2)
+            consumerAction.setOnMouseClicked(mouseClicked ->
             {
-                this.mListViewColaboradores.getSelectionModel().clearSelection();
+                if (mouseClicked.getClickCount() == 2 && !(consumerAction.getSelectionModel().isEmpty()))
+                {
+
+                    this.mListViewColaboradores.getSelectionModel().clearSelection();
+                    this.addEmployeeButton.setText("Añadir Empleado");
+                    this.addEmployeeButton.requestFocus();
+                    this.mListViewColaboradores.requestFocus();
+                }
+                else if (mouseClicked.getClickCount() == 1 && !(consumerAction.getSelectionModel().isEmpty()))
+                {
+                    this.addEmployeeButton.setText("Modificar Empleado");
+                    this.addEmployeeButton.setBorder(Border.EMPTY);
+                    this.addEmployeeButton.requestFocus();
+                }
+            });
+        });
+        //! Anadimos funcionalidad para modificar empleado, trabajamos en conjunto con varios items en pantalla
+        // * Este primer selecctor anade funcionalidad para empleados normales, cuyos campos son faciles de registrar
+        // * Este segundo selector, anade funciionalidad al list view de los managers, cuyos campos son mas complicados
+        collectionOfViews.get(1).getSelectionModel().selectedItemProperty().addListener(listener ->
+        {
+            if (!(collectionOfViews.get(1).getSelectionModel().isEmpty())){
+                String[] strings = collectionOfViews.get(1).getSelectionModel().getSelectedItem().toCSVString().split(",");
+                switch( strings.length)
+                {
+                    case 6:
+                    {
+                        this.mColaboradorNameTextField.setText(strings[0]);
+                        this.mColaboradorApellidoTextField.setText(strings[1]);
+                        this.mColaboradorIDTextField.setText(strings[2]);
+                        this.mColaboradorFechaContratoDatePicker.setValue(LocalDate.ofInstant(
+                                Instant.ofEpochMilli(Long.parseLong(strings[3])),
+                                ZoneId.systemDefault()).atStartOfDay().toLocalDate());
+                        this.mColaboradorSalarioTextField.setText(strings[4]);
+                        break;
+                    }
+                    case 8:
+                    {
+                        this.mColaboradorNameTextField.setText(strings[0]);
+                        this.mColaboradorApellidoTextField.setText(strings[1]);
+                        this.mColaboradorIDTextField.setText(strings[2]);
+                        this.mColaboradorFechaContratoDatePicker.setValue(LocalDate.ofInstant(
+                                Instant.ofEpochMilli(Long.parseLong(strings[3])),
+                                ZoneId.systemDefault()).atStartOfDay().toLocalDate());
+                        this.mColaboradorSalarioTextField.setText(strings[4]);
+                        if (strings[6].equals("TercerNivel")) {
+                            this.mManagerTituloNivelComboBox.getSelectionModel().select("Titulo Tercer Nivel");
+                        } else {
+                            this.mManagerTituloNivelComboBox.getSelectionModel().select(strings[6]);
+                        }
+                        this.mManagerBonificacion.setText(strings[7]);
+                        break;
+                    }
+
+                }
+
+
+            }
+            else
+            {
+                this.mColaboradorNameTextField.clear();
+                this.mColaboradorApellidoTextField.clear();
+                this.mColaboradorSalarioTextField.clear();
+                this.mColaboradorIDTextField.clear();
+                this.mColaboradorFechaContratoDatePicker.setValue(null);
+                this.mManagerTituloNivelComboBox.getSelectionModel().clearSelection();
+                this.mManagerBonificacion.clear();
             }
         });
+
 
         //? Anadimos un listener a las selecciones del panel general para esto vemos cuando editar
         //Procedemos a conectar los formatos de filtrado de datos.
