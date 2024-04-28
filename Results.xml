@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Empleados>
+    <Empleado>
+        <NameEmployee>Juan</NameEmployee>
+        <LNameEmployee>Arellano</LNameEmployee>
+        <IDEmployee>10</IDEmployee>
+        <DateHired>1714248303206</DateHired>
+        <SalaryEmployee>2400.0</SalaryEmployee>
+        <m_DesgloceSalarioEmployee>
+            <entry>
+                <key>DecimoTercero</key>
+                <value>2400.0</value>
+            </entry>
+        </m_DesgloceSalarioEmployee>
+        <DateNumericFormat>1714248303206</DateNumericFormat>
+    </Empleado>
+    <Empleado>
+        <NameEmployee>Sofia</NameEmployee>
+        <LNameEmployee>Jaramillo</LNameEmployee>
+        <IDEmployee>20</IDEmployee>
+        <DateHired>1714248303206</DateHired>
+        <SalaryEmployee>2400.0</SalaryEmployee>
+        <m_DesgloceSalarioEmployee/>
+        <DateNumericFormat>1714248303206</DateNumericFormat>
+    </Empleado>
+    <Empleado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="manager">
+        <NameEmployee>Luis</NameEmployee>
+        <LNameEmployee>Avellan</LNameEmployee>
+        <IDEmployee>240</IDEmployee>
+        <DateHired>1714248303206</DateHired>
+        <SalaryEmployee>3500.0</SalaryEmployee>
+        <m_DesgloceSalarioEmployee/>
+        <DateNumericFormat>1714248303206</DateNumericFormat>
+        <TituloNivelManager>3ro</TituloNivelManager>
+        <ComisionManager>2400.0</ComisionManager>
+    </Empleado>
+</Empleados>

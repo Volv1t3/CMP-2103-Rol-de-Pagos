@@ -4,16 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/CustomExceptions/FileIsEmptyAlert.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CustomExceptions/FileNotFoundAlert.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CustomExceptions/IncorrectCSVFormat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit includes advances both in the logical backend development as well as in the visual frontend development aspects. For starters, the application front end has been structured and two out of three panes have already been completed, the last to complete involves exports methods and frankly I've been working for 8 hours so Im tired. But the main adding, removing">
+      <change afterPath="$PROJECT_DIR$/Results.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CustomCellFactories/EmployeeCellFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CustomCellFactories/ManagerCellFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/Results.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/background.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/programmer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/text.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +33,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="CSS File" />
+        <option value="package-info" />
+        <option value="module-info" />
         <option value="Class" />
       </list>
     </option>
@@ -31,8 +43,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="Santiago Arellano &lt;santiagof2204@hotmai.com&gt;" />
         <option value="Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;" />
+        <option value="Santiago Arellano &lt;santiagof2204@hotmai.com&gt;" />
         <option value="Santiago Arellano" />
       </list>
     </option>
@@ -79,11 +91,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.RolDePagosController.executor": "Run",
+    "Application.RolDePagosView.executor": "Run",
     "Application.TestCSVFormatting.executor": "Run",
     "Application.TestEmployeeAbstraction.executor": "Run",
     "JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar.executor": "Run",
     "Java Scratch.Scratch.executor": "Run",
     "Maven.RolDePagosMain [deploy].executor": "Run",
+    "OverrideImplement.generate.javadoc": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
@@ -92,24 +107,66 @@
     "go.import.settings.migrated": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/santi/OneDrive - Universidad San Francisco de Quito/Documentos",
+    "last_opened_file_path": "C:/Users/santi/AppData/Local/SceneBuilder/SceneBuilder.exe",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.56436783",
     "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Markdown",
       "JAVA",
       "PLAIN_TEXT"
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Application.TestCSVFormatting">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\santi\OneDrive - Universidad San Francisco de Quito\FOURTH SEMESTER\CMP-2103 #Apps Programming In Java # Fausto Pasmay\JavaProgramming\Homework\CMP-2103-Rol-de-Pagos\RolDePagosMain\src\main\java\RolDePagos" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.RolDePagosView">
+    <configuration name="RolDePagosController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RolDePagos.RolDePagosController" />
+      <module name="RolDePagosMain" />
+      <option name="PROGRAM_PARAMETERS" value="$Classpath$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="RolDePagos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RolDePagosView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RolDePagos.RolDePagosView" />
+      <module name="RolDePagosMain" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="RolDePagos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestCSVFormatting" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TestCSVFormatting" />
       <module name="RolDePagosMain" />
@@ -124,10 +181,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RolDePagosMain-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/target/RolDePagosMain-1.0-SNAPSHOT.jar" />
-      <method v="2" />
-    </configuration>
     <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Scratch" />
       <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.java" />
@@ -135,12 +188,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.RolDePagosView" />
+      <item itemvalue="Application.RolDePagosController" />
+      <item itemvalue="Application.TestCSVFormatting" />
+      <item itemvalue="Application.TestEmployeeAbstraction" />
+      <item itemvalue="Java Scratch.Scratch" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RolDePagosView" />
         <item itemvalue="Application.TestCSVFormatting" />
+        <item itemvalue="Application.RolDePagosController" />
         <item itemvalue="Application.TestEmployeeAbstraction" />
         <item itemvalue="Java Scratch.Scratch" />
-        <item itemvalue="JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -163,7 +224,8 @@
       <workItem from="1714003646660" duration="117000" />
       <workItem from="1714003796096" duration="3075000" />
       <workItem from="1714006930849" duration="11477000" />
-      <workItem from="1714096658845" duration="9717000" />
+      <workItem from="1714096658845" duration="10160000" />
+      <workItem from="1714247128565" duration="34490000" />
     </task>
     <task id="LOCAL-00001" summary="[Commit #1] [Santiago Arellano] [main Branch]&#10;&#10;Included All Work Folders, Class, File Structures, Headers, And Maven Dependencies">
       <option name="closed" value="true" />
@@ -181,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714020672083</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[Development Branch] [Code Changes] [Santiago Arellano]&#10;&#10;The present commit includes a series of modifications that allow for CSV formatting, parsing and serializing based on multilevel composition between the main backend classes (Employee and Manager) classes, and a series of new custom Exceptions. Through these classes, the goal of serializing by CSV has been achieved and is in need of testing.">
+      <option name="closed" value="true" />
+      <created>1714107538823</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714107538823</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,7 +260,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[Commit #1] [Santiago Arellano] [main Branch]&#10;&#10;Included All Work Folders, Class, File Structures, Headers, And Maven Dependencies" />
     <MESSAGE value="[Development Branch] [Code Changes] [Santiago Arellano]&#10;&#10;The present commit includes the general definition for the Base Employee class, it implements most methods, including string, compare, compareTo, and opens the door for further work which includes salary, salary attributes and calculations and serialization.&#10;&#10;The class is fully documented" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Development Branch] [Code Changes] [Santiago Arellano]&#10;&#10;The present commit includes the general definition for the Base Employee class, it implements most methods, including string, compare, compareTo, and opens the door for further work which includes salary, salary attributes and calculations and serialization.&#10;&#10;The class is fully documented" />
+    <MESSAGE value="[Development Branch] [Code Changes] [Santiago Arellano]&#10;&#10;The present commit includes a series of modifications that allow for CSV formatting, parsing and serializing based on multilevel composition between the main backend classes (Employee and Manager) classes, and a series of new custom Exceptions. Through these classes, the goal of serializing by CSV has been achieved and is in need of testing." />
+    <option name="LAST_COMMIT_MESSAGE" value="[Development Branch] [Code Changes] [Santiago Arellano]&#10;&#10;The present commit includes a series of modifications that allow for CSV formatting, parsing and serializing based on multilevel composition between the main backend classes (Employee and Manager) classes, and a series of new custom Exceptions. Through these classes, the goal of serializing by CSV has been achieved and is in need of testing." />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>

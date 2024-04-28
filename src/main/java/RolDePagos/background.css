@@ -1,0 +1,11 @@
+.tab:selected .menu-item:selected
+{
+    -fx-background-color: #c5bcbc;
+    -fx-pref-width: 200;
+    -fx-pref-height: 30;
+}
+.tab:default
+{
+    -fx-background-color: #c00000;
+    -fx-pref-width: 250;
+}

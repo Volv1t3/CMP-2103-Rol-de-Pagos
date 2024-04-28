@@ -1,0 +1,33 @@
+
+.aboutSectionHeaders
+{
+    -fx-font-family: "Segoe UI Semibold", "Sans Serif Collection";
+    -fx-font-weight: bold;
+    -fx-font-size: 18
+
+
+}
+.aboutSectionTextFields
+{
+    -fx-font-family: "Bookshelf Symbol 7", "Sans Serif Collection";
+    -fx-font-weight: lighter;
+    -fx-font-size: 16;
+    -fx-fill: GREY;
+    -fx-text-alignment: justify;
+}
+
+.employeeCreationLabels
+{
+    -fx-font-family: "Segoe UI Semibold", "Sans Serif Collection";
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+    -fx-text-alignment: center;
+}
+
+.employeeSubsectionLabels
+{
+    -fx-font-family: "Segoe UI Semibold", "Sans Serif Collection";
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    -fx-text-alignment: center;
+}

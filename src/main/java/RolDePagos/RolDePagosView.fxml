@@ -1,13 +1,426 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<Scene xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="RolDePagos.RolDePagosController">
-
+<Scene fill="#c99494" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RolDePagos.RolDePagosController">
+   <TabPane maxHeight="800.0" maxWidth="2400.0" minHeight="600.0" minWidth="600.0" prefHeight="800" prefWidth="1600.0" stylesheets="@background.css" tabClosingPolicy="UNAVAILABLE">
+     <tabs>
+         <Tab text="Introductory Window">
+            <content>
+               <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                     <SplitPane dividerPositions="1.0" layoutX="101.0" layoutY="77.0" prefHeight="555.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                       <items>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+                              <children>
+                                 <Accordion prefHeight="400.0" prefWidth="291.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                   <panes>
+                                     <TitledPane animated="false" text="About the App - Employee Control">
+                                          <content>
+                                             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+                                                <content>
+                                                   <VBox prefHeight="404.0" prefWidth="279.0" spacing="10.0">
+                                                      <children>
+                                                         <Label prefHeight="25.0" prefWidth="592.0" styleClass="aboutSectionHeaders" text="¿Cómo Trabajar con Esta Sección?" />
+                                                         <TextFlow>
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="Dentro de la pestaña Employee Control, se encuentran todos los procesos relacionados con la creación, eliminación y actualización de registros directos de empleados. Para esto, los empleados se presentan en un listado en el cual diversos controles por teclado y mouse se han abilitado. " textAlignment="JUSTIFY" />
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow>
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="1) Al presionar con boton izquierdo una vez, se elecciona al empleado para su modificacion o eliminación" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow>
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="2) Al presionar con boton izquierdo dos veces, se deselecciona el empleado." wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow>
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="Durante el ingreso o modifcacion de los datos ingresados, los campos revisaran el input OnWriting, es decir, durante su escritura (antes de seleccionar añadir) los datos se revisan y lanzarean advertencia a pantalla de ser datos incorrectos" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow layoutX="20.0" layoutY="55.0">
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="Dentro de la pestaña Employee Control, se encuentran todos los procesos relacionados con la creación, eliminación y actualización de registros directos de empleados. Para esto, los empleados se presentan en un listado en el cual diversos controles por teclado y mouse se han abilitado. " textAlignment="JUSTIFY" />
+                                                            </children>
+                                                         </TextFlow>
+                                                      </children>
+                                                   </VBox>
+                                                </content>
+                                                <padding>
+                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                </padding>
+                                             </ScrollPane>
+                                          </content>
+                                       </TitledPane>
+                                     <TitledPane animated="false" text="About the App  - Report Generation">
+                                          <content>
+                                             <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                                                <content>
+                                                   <VBox prefWidth="100.0" spacing="10.0">
+                                                      <children>
+                                                         <Label styleClass="aboutSectionHeaders" text="¿Cómo Trabajar con Esta Sección?" />
+                                                         <TextFlow>
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="Dentro de esta sección, se manejan todos los procesos de filtrado de datos, analisis y calculos numericos, la carga de tablas y valores por pagar a cada empleado. Para esto, esta sección trabaja con una gran cantidad de separadores logicos y filtros definidos de fábrica, que permiten tanto generar reportes por tablas, como tambien por listas. " wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow>
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="1) Dentro del Sistema, existen grupos para separar los empleados calculados, estos se organizan por sueldo o apellidos, etc. Estos valores se muestran en una lista, cuyo contenido esta listo para ser exportando en formatos CSV, XML o JSON. " wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow layoutX="20.0" layoutY="191.0">
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="2) Para el analisis dentro de la aplicación, se trabaja con una vista tabulada de todos los campos de un trabajador, incluido su dsglose de sueldo. De esta forma, logramos una mirada holistica al proceso de pago de un empleado." wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow layoutX="20.0" layoutY="285.0">
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="3) La aplicación permite la exportación en un formato de lista, del suelo líquido de cada empleado en la cantidad de billetes (Denominación de 1 hasta 20 dólares americanos) asi como un sueldo en letras." wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                      </children>
+                                                   </VBox>
+                                                </content>
+                                                <padding>
+                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                </padding>
+                                             </ScrollPane>
+                                          </content>
+                                       </TitledPane>
+                                       <TitledPane animated="false" text="About the App - Developers">
+                                          <content>
+                                             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+                                                <content>
+                                                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                                      <children>
+                                                         <Label styleClass="aboutSectionHeaders" text="Créditos" />
+                                                         <TextFlow>
+                                                            <children>
+                                                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="Aplicación Desarollada como proyecto final para la clase de CMP 2103 - Programación de Apps. " textAlignment="JUSTIFY" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <Label styleClass="aboutSectionHeaders" text="Desarolladores" />
+                                                         <TextFlow layoutX="20.0" layoutY="55.0">
+                                                            <children>
+                                                               <Text lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="-  Roberto Carlos Villafuerte  Carrillo" textAlignment="JUSTIFY" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow layoutX="20.0" layoutY="142.0">
+                                                            <children>
+                                                               <Text lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="- Santiago Francisco Arellano Jaramillo" textAlignment="JUSTIFY" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <Label layoutX="20.0" layoutY="107.0" styleClass="aboutSectionHeaders" text="Tecnologías Utilizadas" />
+                                                         <TextFlow layoutX="20.0" layoutY="166.0">
+                                                            <children>
+                                                               <Text lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="- OpenJFX" textAlignment="JUSTIFY" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow layoutX="20.0" layoutY="225.0">
+                                                            <children>
+                                                               <Text lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="- SceneBuilder Gluon" textAlignment="JUSTIFY" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow layoutX="20.0" layoutY="249.0">
+                                                            <children>
+                                                               <Text lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="- Jakarta EE XML Bind" textAlignment="JUSTIFY" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                         <TextFlow layoutX="20.0" layoutY="273.0">
+                                                            <children>
+                                                               <Text lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="- Google Code JSON Simple" textAlignment="JUSTIFY" wrappingWidth="257.3333206176758">
+                                                                  <font>
+                                                                     <Font size="10.0" />
+                                                                  </font>
+                                                               </Text>
+                                                            </children>
+                                                         </TextFlow>
+                                                      </children>
+                                                   </VBox>
+                                                </content>
+                                                <padding>
+                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                </padding>
+                                             </ScrollPane>
+                                          </content>
+                                          <padding>
+                                             <Insets top="5.0" />
+                                          </padding>
+                                       </TitledPane>
+                                   </panes>
+                                    <padding>
+                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                 </Accordion>
+                              </children></AnchorPane>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false" />
+                       </items>
+                     </SplitPane>
+                  </children>
+               </AnchorPane>
+            </content></Tab>
+       <Tab text="Employee Control">
+            <content>
+               <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                     <SplitPane dividerPositions="0.4" layoutX="152.0" layoutY="124.0" prefHeight="555.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                       <items>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+                              <children>
+                                 <VBox prefHeight="553.0" prefWidth="232.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                       <StackPane>
+                                          <children>
+                                             <ImageView fx:id="mColaboratorIcon" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                                                <image>
+                                                   <Image url="@programmer.png" />
+                                                </image>
+                                                <viewport>
+                                                   <Rectangle2D />
+                                                </viewport>
+                                                <StackPane.margin>
+                                                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                </StackPane.margin>
+                                             </ImageView>
+                                             <Circle fill="#6f6a6a" opacity="0.21" radius="80.0" stroke="WHITE" strokeType="INSIDE" StackPane.alignment="CENTER" />
+                                          </children>
+                                       </StackPane>
+                                       <TextFlow styleClass="employeeCreationLabels" textAlignment="CENTER">
+                                          <children>
+                                             <Text fx:id="mWelcomeColaboratorMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos Sobre #" textAlignment="CENTER" wrappingWidth="232.7197265625" />
+                                          </children>
+                                       </TextFlow>
+                                       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" vgap="10.0" VBox.vgrow="NEVER">
+                                          <children>
+                                             <RadioButton fx:id="mColaboradorRadioButton" mnemonicParsing="false" selected="true" text="Colaborador">
+                                                <toggleGroup>
+                                                   <ToggleGroup fx:id="colaboradorSelector" />
+                                                </toggleGroup>
+                                             </RadioButton>
+                                             <RadioButton fx:id="mGerenteRadioButton" mnemonicParsing="false" text="Gerente" toggleGroup="$colaboradorSelector" />
+                                          </children>
+                                       </FlowPane>
+                                       <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
+                                         <columnConstraints>
+                                           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                          <children>
+                                             <Label styleClass="employeeSubsectionLabels" text="Nombre:" />
+                                             <TextField fx:id="mColaboradorNameTextField" onKeyTyped="#checkIfInputIsText" promptText="Ana" GridPane.columnIndex="1" />
+                                             <Label styleClass="employeeSubsectionLabels" text="Apellido:" GridPane.rowIndex="1" />
+                                             <TextField fx:id="mColaboradorApellidoTextField" onKeyTyped="#checkIfInputIsText" promptText="Salazar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                             <Label styleClass="employeeSubsectionLabels" text="ID:" GridPane.rowIndex="2" />
+                                             <TextField fx:id="mColaboradorIDTextField" onKeyTyped="#checkIfInputIsNumeric" promptText="Salazar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                             <Label styleClass="employeeSubsectionLabels" text="Fecha Contratacion:" wrapText="true" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES" />
+                                             <DatePicker fx:id="mColaboradorFechaContratoDatePicker" editable="false" promptText="22/04/2004" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                             <Label styleClass="employeeSubsectionLabels" text="Salario: " wrapText="true" GridPane.rowIndex="4" />
+                                             <TextField fx:id="mColaboradorSalarioTextField" onKeyTyped="#checkIfInputIsNumeric" promptText="2400" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                             <Label styleClass="employeeSubsectionLabels" text="Titulo Extra:" wrapText="true" GridPane.rowIndex="5" />
+                                             <ComboBox fx:id="mManagerTituloNivelComboBox" disable="true" prefWidth="150.0" promptText="Seleccione Aqui" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                             <Label styleClass="employeeSubsectionLabels" text="Bonificación Extra:" wrapText="true" GridPane.rowIndex="6" />
+                                             <TextField fx:id="mManagerBonificacion" disable="true" onKeyTyped="#checkIfInputIsNumeric" promptText="2400" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          </children>
+                                          <VBox.margin>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </VBox.margin>
+                                       </GridPane>
+                                       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="50.0" prefWrapLength="100.0" VBox.vgrow="NEVER">
+                                          <children>
+                                             <Button fx:id="deleteEmployeeButton" mnemonicParsing="false" styleClass="aboutSectionHeaders" text="Eliminar Empleado" />
+                                             <Button fx:id="addEmployeeButton" mnemonicParsing="false" styleClass="aboutSectionHeaders" text="Añadir Empleado" />
+                                          </children>
+                                       </FlowPane>
+                                    </children>
+                                 </VBox>
+                              </children>
+                           </AnchorPane>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+                              <children>
+                                 <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <center>
+                                       <ListView fx:id="mListViewColaboradores" prefHeight="553.0" prefWidth="350.0">
+                                          <padding>
+                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          </padding>
+                                       </ListView>
+                                    </center>
+                                    <top>
+                                       <MenuBar fx:id="sortingMenuBar" styleClass="tab" BorderPane.alignment="CENTER">
+                                         <menus>
+                                           <Menu mnemonicParsing="false" text="Ordernar Datos">
+                                             <items>
+                                               <MenuItem fx:id="mSortingAlfabeticoNombreMenuItem" mnemonicParsing="false" text="Alfabetico Nombres" />
+                                                   <MenuItem fx:id="mSortingAlfabeticoApellidosMenuItem" mnemonicParsing="false" text="Alfabetico Apellido" />
+                                                   <MenuItem fx:id="smSortingFechaContratoMenuItem" mnemonicParsing="false" text="Fecha Contratacion" />
+                                                   <MenuItem fx:id="mSortingSueldoMenuItem" mnemonicParsing="false" text="Sueldo " />
+                                                   <MenuItem fx:id="mSortingSueldoYBonoMenuItem" disable="true" mnemonicParsing="false" text="Sorting Sueldo y Bono" />
+                                             </items>
+                                           </Menu>
+                                         </menus>
+                                       </MenuBar>
+                                    </top>
+                                 </BorderPane>
+                              </children>
+                           </AnchorPane>
+                       </items>
+                     </SplitPane>
+                  </children></AnchorPane>
+            </content></Tab>
+         <Tab text="Report Generation">
+            <content>
+               <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                     <SplitPane dividerPositions="0.4642857142857143" layoutX="168.0" layoutY="134.0" prefHeight="555.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <items>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                              <children>
+                                 <SplitPane layoutX="25.0" layoutY="166.0" prefHeight="553.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <items>
+                                       <Separator prefWidth="268.0" />
+                                    </items>
+                                 </SplitPane>
+                              </children>
+                           </AnchorPane>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                              <children>
+                                 <SplitPane dividerPositions="0.5" layoutX="21.0" layoutY="14.0" orientation="VERTICAL" prefHeight="553.0" prefWidth="312.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <items>
+                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                          <children>
+                                             <TableView editable="true" layoutX="21.0" layoutY="29.0" prefHeight="273.0" prefWidth="310.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <columns>
+                                                   <TableColumn prefWidth="75.0" text="C1" />
+                                                   <TableColumn prefWidth="75.0" text="C2" />
+                                                </columns>
+                                             </TableView>
+                                          </children>
+                                       </AnchorPane>
+                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                          <children>
+                                             <ListView layoutX="14.0" layoutY="-13.0" prefHeight="272.0" prefWidth="310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          </children>
+                                       </AnchorPane>
+                                    </items>
+                                 </SplitPane>
+                              </children>
+                           </AnchorPane>
+                        </items>
+                     </SplitPane>
+                  </children>
+               </AnchorPane>
+            </content>
+         </Tab>
+     </tabs>
+      <padding>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+   </TabPane>
+   <stylesheets>
+      <URL value="@background.css" />
+      <URL value="@text.css" />
+   </stylesheets>
 </Scene>

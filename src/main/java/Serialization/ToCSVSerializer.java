@@ -183,12 +183,11 @@ public class ToCSVSerializer {
      */
     protected static Employee parseLine(String e_LineToParse) throws
             InvalidAttributeValueException, IllegalStateException {
-            String[] strings = e_LineToParse.split(",");
+            String[] strings = e_LineToParse.split("[,]");
             switch (strings.length) //? Splitting by the amount of items present in the array of values
             {
                 case AMOUNT_PARSED_FIELDS_BASE_EMPLOYEE /*! Casoe Empleado Particular*/:
                 {
-
                     // Create a new instance to work with
                     Employee parsedEmployee = new Employee();
                     parsedEmployee.setM_nombreEmployee(strings[0]);
@@ -230,7 +229,7 @@ public class ToCSVSerializer {
                     return dummyManager;
                 }
                 default:
-                    throw new IllegalStateException("Unexpected value: " + strings.length);
+                    throw new IllegalStateException("Array Leido Incorrecto, Revisar Formato");
             }
     }
 }

@@ -1,9 +1,18 @@
 import CustomExceptions.FileNotFoundAlert;
 import EmployeeAbstraction.*;
+import Serialization.ToCSVSerializer;
 
 import javax.naming.directory.InvalidAttributeValueException;
+import java.io.File;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 public class TestCSVFormatting {
@@ -149,15 +158,38 @@ public class TestCSVFormatting {
             e.printStackTrace();
         }
 
-        try {
-            throw new FileNotFoundAlert();
 
-        } catch (FileNotFoundAlert e) {
+
+        //? lets generate a new CSV File
+        File results = new File ("./Results.csv");
+        try (PrintWriter printWriter = new PrintWriter("results.csv"))
+        {
+
+            Employee employee1 = new Employee("Luis", "Arellano", 1,
+                    LocalDate.of(2021,12,10).toEpochSecond(LocalTime.now(ZoneId.systemDefault()), ZoneOffset.UTC),
+                    1200);
+            Employee employee2 = new Employee("Sebastian", "Arellano", 2,
+                    LocalDate.of(2022, 4, 10).toEpochSecond(LocalTime.now(ZoneId.systemDefault()), ZoneOffset.UTC),
+                    1000);
+            Employee employee3 = new Employee("Santiago", "Arellano", 3,
+                    LocalDate.of(2022, 6, 10).toEpochSecond(LocalTime.now(ZoneId.systemDefault()), ZoneOffset.UTC),
+                    2000);
+            Manager employee4 = new Manager("Maestria", 1400, "Luis", "Avellano", 4, LocalDate.of(2022, 8, 10).toEpochSecond(LocalTime.now(ZoneId.systemDefault()), ZoneOffset.UTC),
+                    3000);
+            Manager employee5 = new Manager("Titulo Tercer Nivel", 1600, "Sofia", "Jaramillo", 5, LocalDate.of(2022, 9, 10).toEpochSecond(LocalTime.now(ZoneId.systemDefault()), ZoneOffset.UTC),
+                    3240);
+            Manager employee6 = new Manager("Doctorado", 1800, "Juan", "Perez", 6, LocalDate.of(2022, 10, 10).toEpochSecond(LocalTime.now(ZoneId.systemDefault()), ZoneOffset.UTC),
+                    3000);
+
+            EmployeeListWrapper newWrapper = new EmployeeListWrapper();
+            newWrapper.setM_employees(new ArrayList<Employee>());
+            Collections.addAll(newWrapper.getM_employees(), employee1, employee2, employee3, employee4, employee5, employee6);
+
+            ToCSVSerializer.serializeToFile(results, newWrapper);
+        }
+        catch (Exception e)
+        {
             System.out.println(e.getMessage());
-            e.printStackTrace();
-            System.out.println(e.getM_errorContent());
-            System.out.println(e.getM_ErrorTitle());
-            System.out.println(e.getM_ErrorHeader());
         }
     }
 }

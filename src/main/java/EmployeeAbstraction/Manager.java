@@ -142,7 +142,7 @@ public class Manager extends Employee implements Serializable {
         if (other == null) {throw new NullPointerException("Error Code 0x0001 - [Raised] Invalid Argument passed into compareTo method, second arg. is null");}
         //! Paso inductivo: usamos el compareTo robusto de Float, evitamos implementacion propia
         return Objects.compare(this.getM_sueldoEmployee() + this.getM_ComisionManager(),
-                other.getM_sueldoEmployee() + this.getM_ComisionManager(), Float::compareTo);
+                other.getM_sueldoEmployee() + ((Manager) other).getM_ComisionManager(), Float::compareTo);
     }
 
     //? Implementacion del metodo toString()
