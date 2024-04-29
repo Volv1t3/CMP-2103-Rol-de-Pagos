@@ -77,15 +77,15 @@ public class ManagerCellFactory extends ListCell<Employee> {
                 Label hireDateValue = new Label(new SimpleDateFormat("dd/MM/yyy").format(Long.valueOf(strings[3])));
                 Label tituloValue = new Label();
                 switch (strings[6]) {
-                    case "Maestria": {
+                    case Manager.MAESTRIA_CONSTANT: {
                         tituloValue.setText("Maestria");
                         break;
                     }
-                    case "Doctorado": {
+                    case Manager.DOCTORADO_CONSTANT: {
                         tituloValue.setText("Doctorado");
                         break;
                     }
-                    case "TercerNivel": {
+                    case Manager.TERCER_NIVEL_CONSTANT: {
                         tituloValue.setText("Tercer Nivel");
                         break;
                     }

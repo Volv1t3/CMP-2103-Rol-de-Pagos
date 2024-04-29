@@ -10,11 +10,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.List;
 
 @XmlRootElement(name = "Empleados")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class EmployeeListWrapper {
+public class EmployeeListWrapper implements Serializable {
 
     /**
      * Lista de Empleados a Registrar.

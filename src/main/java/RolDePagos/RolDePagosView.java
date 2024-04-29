@@ -8,17 +8,14 @@ import EmployeeAbstraction.Manager;
 import Serialization.ToCSVSerializer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Border;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.naming.directory.InvalidAttributeValueException;
-import javax.naming.directory.InvalidAttributesException;
 import java.io.File;
 import java.sql.Date;
 import java.time.Instant;
@@ -140,10 +137,12 @@ public class RolDePagosView extends Application {
                 if (this.mColaboradorRadioButton.isSelected() && this.mListViewColaboradores.getSelectionModel().isEmpty()) {
                     Employee dummyEmployee = new Employee();
                     //! Agarramos primero el nombre
-                    if (!(this.mColaboradorNameTextField.getText().isEmpty())) {
+                    if (!(this.mColaboradorNameTextField.getText().isEmpty()))
+                    {
                         try {
                             dummyEmployee.setM_nombreEmployee(this.mColaboradorNameTextField.getText());
-                        } catch (InvalidAttributeValueException e) {
+                        }
+                        catch (InvalidAttributeValueException e) {
                             this.generalAlert.setTitle("Nombre Invalido");
                             this.generalAlert.setHeaderText("El nombre ingresado no es valido");
                             this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar solo un nombre por empleado.");
@@ -151,15 +150,15 @@ public class RolDePagosView extends Application {
                             this.generalAlert.showAndWait();
                             error_Flag = true;
                         }
-                        catch (NullPointerException e)
-                        {
+                        catch (NullPointerException e) {
                             this.generalAlert.setTitle("Campo Vacio");
                             this.generalAlert.setHeaderText("El campo nombre esta vacio");
                             this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un nombre por empleado.");
                             error_Flag = true;
                             this.generalAlert.showAndWait();
                         }
-                    } else {
+                    }
+                    else {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo nombre esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un nombre por empleado.");
@@ -186,7 +185,8 @@ public class RolDePagosView extends Application {
                                 error_Flag = true;
                                 this.generalAlert.showAndWait();
                             }
-                    } else {
+                    }
+                    else {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo apellido esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un apellido por empleado.");
@@ -227,7 +227,8 @@ public class RolDePagosView extends Application {
                             error_Flag = true;
                         }
 
-                    } else {
+                    }
+                    else {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo codigo esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un codigo por empleado.");
@@ -238,7 +239,8 @@ public class RolDePagosView extends Application {
                     try {
                         dummyEmployee.setM_fechaContratacionEmployee(Date.valueOf(this.mColaboradorFechaContratoDatePicker.getValue()).getTime());
 
-                    } catch (InvalidAttributeValueException e) {
+                    } catch (InvalidAttributeValueException e)
+                    {
                         this.generalAlert.setTitle("Fecha Invalida");
                         this.generalAlert.setHeaderText("La fecha ingresada no es valida");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una fecha valida por empleado.");
@@ -253,7 +255,7 @@ public class RolDePagosView extends Application {
                         this.generalAlert.showAndWait();
                         error_Flag = true;
                     }
-
+                    //! Revisamos el Salario
                     if (!(this.mColaboradorSalarioTextField.getText().isEmpty())) {
                         //! Convert to Float
                         Float readInSalary = Float.parseFloat(this.mColaboradorSalarioTextField.getText());
@@ -278,7 +280,6 @@ public class RolDePagosView extends Application {
                         }
 
                     }
-
                     if (!error_Flag) {
                         this.m_WrapperList.getM_employees().add(dummyEmployee); // General Holder
                         this.EmployeeHolder.add(dummyEmployee); // Specialized Holder
@@ -383,13 +384,15 @@ public class RolDePagosView extends Application {
                     try {
                         dummyManager.setM_fechaContratacionEmployee(Date.valueOf(this.mColaboradorFechaContratoDatePicker.getValue()).getTime());
 
-                    } catch (InvalidAttributeValueException e) {
+                    } catch (InvalidAttributeValueException e)
+                    {
                         this.generalAlert.setTitle("Fecha Invalida");
                         this.generalAlert.setHeaderText("La fecha ingresada no es valida");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una fecha valida por empleado.");
                         this.generalAlert.showAndWait();
                         error_Flag = true;
-                    } catch (NullPointerException e) {
+                    } catch (NullPointerException e)
+                    {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo fecha esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar una fecha por empleado.");
@@ -419,7 +422,8 @@ public class RolDePagosView extends Application {
                                 this.generalAlert.showAndWait();
                             }
                         }
-                    } else {
+                    }
+                    else {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo salario esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un salario por empleado.");
@@ -430,15 +434,15 @@ public class RolDePagosView extends Application {
                     try {
                         switch (this.mManagerTituloNivelComboBox.getSelectionModel().getSelectedItem()) {
                             case "Maestria": {
-                                dummyManager.setM_TituloNivelManager("Maestria");
+                                dummyManager.setM_TituloNivelManager(Manager.MAESTRIA_CONSTANT);
                                 break;
                             }
                             case "Doctorado": {
-                                dummyManager.setM_TituloNivelManager("Doctorado");
+                                dummyManager.setM_TituloNivelManager(Manager.DOCTORADO_CONSTANT);
                                 break;
                             }
                             case "Titulo Tercer Nivel": {
-                                dummyManager.setM_TituloNivelManager("TercerNivel");
+                                dummyManager.setM_TituloNivelManager(Manager.TERCER_NIVEL_CONSTANT);
                                 break;
                             }
                         }
@@ -718,15 +722,15 @@ public class RolDePagosView extends Application {
                     try {
                         switch (this.mManagerTituloNivelComboBox.getSelectionModel().getSelectedItem()) {
                             case "Maestria": {
-                                toModify.setM_TituloNivelManager("Maestria");
+                                toModify.setM_TituloNivelManager(Manager.MAESTRIA_CONSTANT);
                                 break;
                             }
                             case "Doctorado": {
-                                toModify.setM_TituloNivelManager("Doctorado");
+                                toModify.setM_TituloNivelManager(Manager.DOCTORADO_CONSTANT);
                                 break;
                             }
                             case "Titulo Tercer Nivel": {
-                                toModify.setM_TituloNivelManager("TercerNivel");
+                                toModify.setM_TituloNivelManager(Manager.TERCER_NIVEL_CONSTANT);
                                 break;
                             }
                         }

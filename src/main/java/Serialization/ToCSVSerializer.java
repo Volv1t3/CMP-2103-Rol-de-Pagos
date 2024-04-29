@@ -30,7 +30,7 @@ public class ToCSVSerializer {
      * </ul>
      */
     @SuppressWarnings("unused")
-    private static final int AMOUNT_PARSED_FIELDS_BASE_EMPLOYEE = (6);
+    public static final int AMOUNT_PARSED_FIELDS_BASE_EMPLOYEE = (6);
     /**
      * Constante Estatica relacionada con la longitud generica de una string CSV recortada de un Manager Derivado de
      * Employee. Su valor es de ocho, dados los campos que contiene
@@ -41,7 +41,7 @@ public class ToCSVSerializer {
      * </ul>
      */
     @SuppressWarnings("unused")
-    private static final int AMOUNT_PARSED_FIELDS_MANAGER_EMPLOYEE = 8;
+    public static final int AMOUNT_PARSED_FIELDS_MANAGER_EMPLOYEE = 8;
 
 
     //! Implementacion de metodos base, serializeToFile, deserailizeFromFile

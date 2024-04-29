@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="">
+    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="[Development Branch][Bug Fixes And Changes] [Santiago Arellano]&#10;&#10;The present commit, brings changes into most of the backend for the application. All the serialization methods have been written, tested, and are awaiting connection with the UI once the salary calculation methods have been polished and the field constants that will be used are done. Changes into the way most classes hold the data for the Secondary Title that an employee can hold has been altered in the Manager class. The introduction of three new constants has allowed for a streamlined environment which will guarantee a correct input, output, display and modification of data through the UI and the serialized versions of the EmployeeListWrapper.&#10;&#10;For the JSON serialization method, while constant data members with the names of the fields have not been added, they remain constant through both manager and employee instances. The only difference is the Key that points to the entire collection of data (This key could be Manager or Employee but not both). For XML, the structure has been defined polymorphic throughout the codebase for the EmployeeAbstraction package. This allows for serialization of both classes inside the same file, and deserialization from the same file. &#10;&#10;In terms of CSV serialization, a more robust check for the Titulo of Manager has been added, serialization is more standard using the aforementioned constants as well as the toCSVString() methods defined in the EmployeeAbstraction package classes. Finally, as for Binary, both serialization and deserialization have been added and work flawlessly given their integration with the Serializable Annotation interface. &#10;&#10;Overall functionality can be guaranteed. However, cohesion with the Ui cannot be guaranteed at this time as the methods, most important ones, have not been developed yet, as such, most of the integration with the TableViews, sorting, editing, and filtering have not been developed as of yet.&#10;Tested-by: Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;">
+      <change afterPath="$PROJECT_DIR$/src/test/java/TestBinarySerialization.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CustomCellFactories/ManagerCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CustomCellFactories/ManagerCellFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/EmployeeListWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/EmployeeListWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/Results.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/Results.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToBinarySerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToBinarySerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToJsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToJsonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToXMLSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToXMLSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,16 +50,16 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
     {
-      "assignee": "Volv1t3"
+      &quot;assignee&quot;: &quot;Volv1t3&quot;
     }
   ],
-  "lastFilter": {
-    "assignee": "Volv1t3"
+  &quot;lastFilter&quot;: {
+    &quot;assignee&quot;: &quot;Volv1t3&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Volv1t3/CMP-2103-Rol-de-Pagos.git&quot;,
@@ -81,6 +92,7 @@
   "keyToString": {
     "Application.RolDePagosController.executor": "Run",
     "Application.RolDePagosView.executor": "Run",
+    "Application.TestBinarySerialization.executor": "Run",
     "Application.TestCSVFormatting.executor": "Run",
     "Application.TestEmployeeAbstraction.executor": "Run",
     "JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar.executor": "Run",
@@ -105,7 +117,7 @@
     "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.56436783",
-    "settings.editor.selected.configurable": "settings.space",
+    "settings.editor.selected.configurable": "settings.json.schema",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   },
@@ -155,6 +167,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestBinarySerialization" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestBinarySerialization" />
+      <module name="RolDePagosMain" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestCSVFormatting" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TestCSVFormatting" />
       <module name="RolDePagosMain" />
@@ -169,27 +188,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Scratch" />
-      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.java" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Application.TestBinarySerialization" />
       <item itemvalue="Application.RolDePagosView" />
       <item itemvalue="Application.RolDePagosController" />
       <item itemvalue="Application.TestCSVFormatting" />
       <item itemvalue="Application.TestEmployeeAbstraction" />
-      <item itemvalue="Java Scratch.Scratch" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.RolDePagosView" />
+        <item itemvalue="Application.TestBinarySerialization" />
         <item itemvalue="Application.TestCSVFormatting" />
         <item itemvalue="Application.RolDePagosController" />
         <item itemvalue="Application.TestEmployeeAbstraction" />
-        <item itemvalue="Java Scratch.Scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -214,7 +226,10 @@
       <workItem from="1714006930849" duration="11477000" />
       <workItem from="1714096658845" duration="10160000" />
       <workItem from="1714247128565" duration="34677000" />
-      <workItem from="1714319276457" duration="4746000" />
+      <workItem from="1714319276457" duration="5144000" />
+      <workItem from="1714328321707" duration="343000" />
+      <workItem from="1714341532059" duration="395000" />
+      <workItem from="1714342091077" duration="13646000" />
     </task>
     <task id="LOCAL-00001" summary="[Commit #1] [Santiago Arellano] [main Branch]&#10;&#10;Included All Work Folders, Class, File Structures, Headers, And Maven Dependencies">
       <option name="closed" value="true" />
@@ -248,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714283308584</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit updates and finishes the work needed for a presentable edit and generation of an employee window in the application. It can handle, adding, deleting, editing, reviewing, and sorting employees within separate lists which create a rich UI for the user needs.">
+      <option name="closed" value="true" />
+      <created>1714324449185</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714324449185</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +283,9 @@
     <MESSAGE value="[Development Branch] [Code Changes] [Santiago Arellano]&#10;&#10;The present commit includes a series of modifications that allow for CSV formatting, parsing and serializing based on multilevel composition between the main backend classes (Employee and Manager) classes, and a series of new custom Exceptions. Through these classes, the goal of serializing by CSV has been achieved and is in need of testing." />
     <MESSAGE value="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit includes advances both in the logical backend development as well as in the visual frontend development aspects. For starters, the application front end has been structured and two out of three panes have already been completed, the last to complete involves exports methods and frankly I've been working for 8 hours so Im tired. But the main adding, removing" />
     <MESSAGE value="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit includes advances both in the logical backend development as well as in the visual frontend development aspects. For starters, the application front end has been structured and two out of three panes have already been completed, the last to complete involves exports methods and frankly I've been working for 8 hours so Im tired. But the main adding, removing have been worked out completely. The main misssing component is the edit a record functionality which wont take much of tomorrow to Finish. Aside from this fact, the main functionality, sorting methods and UI are working flawlessly, capable of constant update and expansion upon its basic functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit includes advances both in the logical backend development as well as in the visual frontend development aspects. For starters, the application front end has been structured and two out of three panes have already been completed, the last to complete involves exports methods and frankly I've been working for 8 hours so Im tired. But the main adding, removing have been worked out completely. The main misssing component is the edit a record functionality which wont take much of tomorrow to Finish. Aside from this fact, the main functionality, sorting methods and UI are working flawlessly, capable of constant update and expansion upon its basic functionality" />
+    <MESSAGE value="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit updates and finishes the work needed for a presentable edit and generation of an employee window in the application. It can handle, adding, deleting, editing, reviewing, and sorting employees within separate lists which create a rich UI for the user needs." />
+    <MESSAGE value="[Development Branch][Bug Fixes And Changes] [Santiago Arellano]&#10;&#10;The present commit, brings changes into most of the backend for the application. All the serialization methods have been written, tested, and are awaiting connection with the UI once the salary calculation methods have been polished and the field constants that will be used are done. Changes into the way most classes hold the data for the Secondary Title that an employee can hold has been altered in the Manager class. The introduction of three new constants has allowed for a streamlined environment which will guarantee a correct input, output, display and modification of data through the UI and the serialized versions of the EmployeeListWrapper.&#10;&#10;For the JSON serialization method, while constant data members with the names of the fields have not been added, they remain constant through both manager and employee instances. The only difference is the Key that points to the entire collection of data (This key could be Manager or Employee but not both). For XML, the structure has been defined polymorphic throughout the codebase for the EmployeeAbstraction package. This allows for serialization of both classes inside the same file, and deserialization from the same file. &#10;&#10;In terms of CSV serialization, a more robust check for the Titulo of Manager has been added, serialization is more standard using the aforementioned constants as well as the toCSVString() methods defined in the EmployeeAbstraction package classes. Finally, as for Binary, both serialization and deserialization have been added and work flawlessly given their integration with the Serializable Annotation interface. &#10;&#10;Overall functionality can be guaranteed. However, cohesion with the Ui cannot be guaranteed at this time as the methods, most important ones, have not been developed yet, as such, most of the integration with the TableViews, sorting, editing, and filtering have not been developed as of yet.&#10;Tested-by: Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Development Branch][Bug Fixes And Changes] [Santiago Arellano]&#10;&#10;The present commit, brings changes into most of the backend for the application. All the serialization methods have been written, tested, and are awaiting connection with the UI once the salary calculation methods have been polished and the field constants that will be used are done. Changes into the way most classes hold the data for the Secondary Title that an employee can hold has been altered in the Manager class. The introduction of three new constants has allowed for a streamlined environment which will guarantee a correct input, output, display and modification of data through the UI and the serialized versions of the EmployeeListWrapper.&#10;&#10;For the JSON serialization method, while constant data members with the names of the fields have not been added, they remain constant through both manager and employee instances. The only difference is the Key that points to the entire collection of data (This key could be Manager or Employee but not both). For XML, the structure has been defined polymorphic throughout the codebase for the EmployeeAbstraction package. This allows for serialization of both classes inside the same file, and deserialization from the same file. &#10;&#10;In terms of CSV serialization, a more robust check for the Titulo of Manager has been added, serialization is more standard using the aforementioned constants as well as the toCSVString() methods defined in the EmployeeAbstraction package classes. Finally, as for Binary, both serialization and deserialization have been added and work flawlessly given their integration with the Serializable Annotation interface. &#10;&#10;Overall functionality can be guaranteed. However, cohesion with the Ui cannot be guaranteed at this time as the methods, most important ones, have not been developed yet, as such, most of the integration with the TableViews, sorting, editing, and filtering have not been developed as of yet.&#10;Tested-by: Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>

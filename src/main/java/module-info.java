@@ -8,6 +8,7 @@ module RolDePagosMain {
     requires javafx.media;
     requires javafx.web;
     requires java.sql;
+    requires json.simple;
 
     opens RolDePagos to javafx.fxml;
     exports RolDePagos;

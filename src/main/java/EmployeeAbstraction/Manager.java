@@ -29,6 +29,10 @@ public class Manager extends Employee implements Serializable {
 
     private Float m_ComisionManager;
 
+    /*Constantes para analisis interno de clases y programa en general*/
+    public static final String DOCTORADO_CONSTANT = "Doctorado";
+    public static final String MAESTRIA_CONSTANT = "Maestria";
+    public static final String TERCER_NIVEL_CONSTANT = "TercerNivel";
     //? Constructor Simple sin Argumentos Para JAXB
     /**
      * Constructor de la clase Manager.
