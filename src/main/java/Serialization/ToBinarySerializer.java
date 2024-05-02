@@ -123,8 +123,7 @@ public class ToBinarySerializer {
     @SuppressWarnings("unused")
     public static EmployeeListWrapper deserializeFromBinary(File e_InputFile)
 
-            throws FileNotFoundAlert, IOException
-    {
+            throws FileNotFoundAlert, IOException, ClassNotFoundException, FileIsEmptyAlert {
         //? Paso Base 1: Creamos dos clases, FileInputStream y ObjectInputStream para deserializar la estructura del archivo
         try (FileInputStream fis = new FileInputStream(e_InputFile);
              ObjectInputStream ois = new ObjectInputStream(fis)){
@@ -166,10 +165,9 @@ public class ToBinarySerializer {
         {
             throw new IOException(ioException);
         }
-
-        catch(Exception e)
+        catch(ClassNotFoundException e)
         {
-            throw new RuntimeException(e);
+            throw new ClassNotFoundException();
         }
 
     }

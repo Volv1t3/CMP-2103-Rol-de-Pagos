@@ -4,20 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="[Development Branch][Bug Fixes And Changes] [Santiago Arellano]&#10;&#10;The present commit, brings changes into most of the backend for the application. All the serialization methods have been written, tested, and are awaiting connection with the UI once the salary calculation methods have been polished and the field constants that will be used are done. Changes into the way most classes hold the data for the Secondary Title that an employee can hold has been altered in the Manager class. The introduction of three new constants has allowed for a streamlined environment which will guarantee a correct input, output, display and modification of data through the UI and the serialized versions of the EmployeeListWrapper.&#10;&#10;For the JSON serialization method, while constant data members with the names of the fields have not been added, they remain constant through both manager and employee instances. The only difference is the Key that points to the entire collection of data (This key could be Manager or Employee but not both). For XML, the structure has been defined polymorphic throughout the codebase for the EmployeeAbstraction package. This allows for serialization of both classes inside the same file, and deserialization from the same file. &#10;&#10;In terms of CSV serialization, a more robust check for the Titulo of Manager has been added, serialization is more standard using the aforementioned constants as well as the toCSVString() methods defined in the EmployeeAbstraction package classes. Finally, as for Binary, both serialization and deserialization have been added and work flawlessly given their integration with the Serializable Annotation interface. &#10;&#10;Overall functionality can be guaranteed. However, cohesion with the Ui cannot be guaranteed at this time as the methods, most important ones, have not been developed yet, as such, most of the integration with the TableViews, sorting, editing, and filtering have not been developed as of yet.&#10;Tested-by: Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;">
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestBinarySerialization.java" afterDir="false" />
+    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/SalaryCalculations/MoneyPresentationHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToSalaryReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CustomCellFactories/ManagerCellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CustomCellFactories/ManagerCellFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/EmployeeListWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/EmployeeListWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/Results.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/Results.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/Results.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/results.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToBinarySerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToBinarySerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToJsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToJsonSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToXMLSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToXMLSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +90,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.MoneyPresentationHelper.executor": "Run",
     "Application.RolDePagosController.executor": "Run",
     "Application.RolDePagosView.executor": "Run",
     "Application.TestBinarySerialization.executor": "Run",
@@ -97,6 +98,7 @@
     "Application.TestEmployeeAbstraction.executor": "Run",
     "JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar.executor": "Run",
     "Java Scratch.Scratch.executor": "Run",
+    "Maven.RolDePagosMain [clean].executor": "Run",
     "Maven.RolDePagosMain [deploy].executor": "Run",
     "OverrideImplement.generate.javadoc": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -135,6 +137,19 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.RolDePagosView">
+    <configuration name="MoneyPresentationHelper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SalaryCalculations.MoneyPresentationHelper" />
+      <module name="RolDePagosMain" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SalaryCalculations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RolDePagosController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="RolDePagos.RolDePagosController" />
       <module name="RolDePagosMain" />
@@ -181,27 +196,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestEmployeeAbstraction" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TestEmployeeAbstraction" />
-      <module name="RolDePagosMain" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Application.MoneyPresentationHelper" />
       <item itemvalue="Application.TestBinarySerialization" />
       <item itemvalue="Application.RolDePagosView" />
       <item itemvalue="Application.RolDePagosController" />
       <item itemvalue="Application.TestCSVFormatting" />
-      <item itemvalue="Application.TestEmployeeAbstraction" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.RolDePagosView" />
-        <item itemvalue="Application.TestBinarySerialization" />
+        <item itemvalue="Application.MoneyPresentationHelper" />
         <item itemvalue="Application.TestCSVFormatting" />
+        <item itemvalue="Application.TestBinarySerialization" />
         <item itemvalue="Application.RolDePagosController" />
-        <item itemvalue="Application.TestEmployeeAbstraction" />
       </list>
     </recent_temporary>
   </component>
@@ -229,7 +237,8 @@
       <workItem from="1714319276457" duration="5144000" />
       <workItem from="1714328321707" duration="343000" />
       <workItem from="1714341532059" duration="395000" />
-      <workItem from="1714342091077" duration="13646000" />
+      <workItem from="1714342091077" duration="14463000" />
+      <workItem from="1714601028502" duration="19993000" />
     </task>
     <task id="LOCAL-00001" summary="[Commit #1] [Santiago Arellano] [main Branch]&#10;&#10;Included All Work Folders, Class, File Structures, Headers, And Maven Dependencies">
       <option name="closed" value="true" />
@@ -271,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714324449185</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[Development Branch][Bug Fixes And Changes] [Santiago Arellano]&#10;&#10;The present commit, brings changes into most of the backend for the application. All the serialization methods have been written, tested, and are awaiting connection with the UI once the salary calculation methods have been polished and the field constants that will be used are done. Changes into the way most classes hold the data for the Secondary Title that an employee can hold has been altered in the Manager class. The introduction of three new constants has allowed for a streamlined environment which will guarantee a correct input, output, display and modification of data through the UI and the serialized versions of the EmployeeListWrapper.&#10;&#10;For the JSON serialization method, while constant data members with the names of the fields have not been added, they remain constant through both manager and employee instances. The only difference is the Key that points to the entire collection of data (This key could be Manager or Employee but not both). For XML, the structure has been defined polymorphic throughout the codebase for the EmployeeAbstraction package. This allows for serialization of both classes inside the same file, and deserialization from the same file. &#10;&#10;In terms of CSV serialization, a more robust check for the Titulo of Manager has been added, serialization is more standard using the aforementioned constants as well as the toCSVString() methods defined in the EmployeeAbstraction package classes. Finally, as for Binary, both serialization and deserialization have been added and work flawlessly given their integration with the Serializable Annotation interface. &#10;&#10;Overall functionality can be guaranteed. However, cohesion with the Ui cannot be guaranteed at this time as the methods, most important ones, have not been developed yet, as such, most of the integration with the TableViews, sorting, editing, and filtering have not been developed as of yet.&#10;Tested-by: Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;">
+      <option name="closed" value="true" />
+      <created>1714358867493</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1714358867493</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

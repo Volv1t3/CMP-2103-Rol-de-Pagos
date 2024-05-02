@@ -40,7 +40,8 @@ public class ToJsonSerializer {
      * @throws FileNotFoundAlert Si el archivo de salida no se puede encontrar.
      * @throws IllegalArgumentException Si el objeto EmployeeListWrapper es nulo o la lista de empleados esta vacia.
      */
-    public static boolean serializeToFile(File e_OutputFile, EmployeeListWrapper e_EmployeeList) throws FileNotFoundAlert, IllegalArgumentException
+    public static boolean serializeToFile(File e_OutputFile, EmployeeListWrapper e_EmployeeList)
+            throws FileNotFoundAlert, IllegalArgumentException
     {
         try (PrintWriter printWriter = new PrintWriter(e_OutputFile))
         {
@@ -116,7 +117,8 @@ public class ToJsonSerializer {
      * @throws IllegalStateException Lanzada si ocurre un error durante la deserialización o si los datos
      * del archivo no tienen el formato correcto para esta aplicacion.
      */
-    public static EmployeeListWrapper deserializeFromFile(File e_InputFile) throws FileNotFoundAlert, FileIsEmptyAlert, IllegalStateException{
+    public static EmployeeListWrapper deserializeFromFile(File e_InputFile)
+            throws FileNotFoundAlert, FileIsEmptyAlert, IllegalStateException{
 
         try{
             if (e_InputFile.exists()) {

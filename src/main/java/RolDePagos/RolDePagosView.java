@@ -2,21 +2,33 @@ package RolDePagos;
 
 import CustomCellFactories.EmployeeCellFactory;
 import CustomCellFactories.ManagerCellFactory;
+import CustomExceptions.FileIsEmptyAlert;
+import CustomExceptions.FileNotFoundAlert;
+import CustomExceptions.IncorrectCSVFormat;
 import EmployeeAbstraction.Employee;
 import EmployeeAbstraction.EmployeeListWrapper;
 import EmployeeAbstraction.Manager;
-import Serialization.ToCSVSerializer;
+import Serialization.*;
+import com.sun.xml.bind.v2.model.core.ID;
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Border;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import javax.naming.directory.InvalidAttributeValueException;
+import javax.swing.plaf.multi.MultiInternalFrameUI;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -51,10 +63,32 @@ public class RolDePagosView extends Application {
     private MenuBar sortingMenuBar;
     //! Alerta generalizada
     private Alert generalAlert = new Alert(Alert.AlertType.ERROR);
+    private Alert fileNotFoundAlert = new Alert(Alert.AlertType.ERROR);
+    //! Variables de Entorno para manejar input y output de datos
+    private Button importarDatosBinario;
+    private Button exportarDatosBinario;
+    private Button importarDatosCSV;
+    private Button exportarDatosCSV;
+    private Button importarDatosXML;
+    private Button exportarDatosXML;
+    private Button importarDatosJSON;
+    private Button exportarDatosJSON;
+    private Button eliminarDatos;
+    private Button exportarDatosTributarios;
+    private RadioButton descargaInformacionTributariaRadioButton;
+    private RadioButton descargaInformacionSueldosLiquidosMenoresRadioButton;
+    private RadioButton descargaInformacionTributariaYSueldosRadioButton;
+    private RadioButton descargaGerentesToggleButton;
+    private RadioButton descargaGeneralToggleButton;
+    private RadioButton descargaColaboradoresToggleButton;
+    private MenuBar selectorMenuItemsEmpleados;
+
+    private TableView<Employee> tableDesgloseSalario;
+
     @Override
     public void init() throws Exception {
         //? Vamos A Cargar Un Archivo CSV Directamente a la aplicacion para su manipulacion
-        this.m_WrapperList =  ToCSVSerializer.deserializeFromFile(new File("src/main/java/RolDePagos/Results.csv"));
+        this.m_WrapperList = ToCSVSerializer.deserializeFromFile( new File("src/main/java/RolDePagos/results.csv"));
         this.ManagerHolder = new ArrayList<>();
         this.EmployeeHolder = new ArrayList<>();
         this.m_WrapperList.getM_employees().forEach(employee ->
@@ -81,6 +115,12 @@ public class RolDePagosView extends Application {
         Scene root = FXMLLoader.load((rootcontent.toURI().toURL()));
         primaryStage.setScene(root); primaryStage.show();
 
+        this.tableDesgloseSalario = (TableView<Employee>) root.lookup("#tableDesgloseSalario");
+        this.selectorMenuItemsEmpleados = (MenuBar) root.lookup("#selectorMenuItemsEmpleados");
+        for(Employee em : this.m_WrapperList.getM_employees())
+        {
+            updateTables(em);
+        }
         //? Cargamos dependiendo del tipo de selector
         this.mColaboradorRadioButton = (RadioButton) root.lookup("#mColaboradorRadioButton");
         this.mGerenteRadioButton = (RadioButton) root.lookup("#mGerenteRadioButton");
@@ -285,6 +325,7 @@ public class RolDePagosView extends Application {
                         this.EmployeeHolder.add(dummyEmployee); // Specialized Holder
                         this.mListViewColaboradores.requestFocus();
                         this.mListViewColaboradores.refresh();
+                        updateTables(dummyEmployee);
                     }
 
                 }
@@ -309,7 +350,8 @@ public class RolDePagosView extends Application {
                             error_Flag = true;
                             this.generalAlert.showAndWait();
                         }
-                    } else {
+                    }
+                    else {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo nombre esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un nombre por empleado.");
@@ -334,7 +376,8 @@ public class RolDePagosView extends Application {
                             error_Flag = true;
                             this.generalAlert.showAndWait();
                         }
-                    } else {
+                    }
+                    else {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo apellido esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un apellido por empleado.");
@@ -373,7 +416,8 @@ public class RolDePagosView extends Application {
                             error_Flag = true;
                         }
 
-                    } else {
+                    }
+                    else {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo codigo esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un codigo por empleado.");
@@ -446,14 +490,16 @@ public class RolDePagosView extends Application {
                                 break;
                             }
                         }
-                    } catch (InvalidAttributeValueException e) {
+                    } catch (InvalidAttributeValueException e)
+                    {
                         this.generalAlert.setTitle("Titulo Invalido");
                         this.generalAlert.setHeaderText("El titulo ingresado no es valido");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un titulo valido por empleado.");
                         this.mManagerTituloNivelComboBox.getSelectionModel().clearSelection();
                         error_Flag = true;
                         this.generalAlert.showAndWait();
-                    } catch (NullPointerException e) {
+                    } catch (NullPointerException e)
+                    {
                         this.generalAlert.setTitle("Campo Vacio");
                         this.generalAlert.setHeaderText("El campo titulo esta vacio");
                         this.generalAlert.setContentText("Por favor, revise sus datos y asegurese de ingresar un titulo por empleado.");
@@ -503,6 +549,7 @@ public class RolDePagosView extends Application {
                         this.ManagerHolder.add(dummyManager); //Holder Especializado
                         this.mListVIewColaboradoresManagers.requestFocus();
                         this.mListVIewColaboradoresManagers.refresh();
+                        updateTables(dummyManager);
                     }
                 }
                 if (this.mColaboradorRadioButton.isSelected() && !(this.mListViewColaboradores.getSelectionModel().isEmpty()))
@@ -808,12 +855,14 @@ public class RolDePagosView extends Application {
                    this.EmployeeHolder.remove(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
                    this.m_WrapperList.getM_employees().remove(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
                    this.mListViewColaboradores.requestFocus();
+                   removeEmployee(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
                }
                else if (this.mGerenteRadioButton.isSelected())
                {
                    this.ManagerHolder.remove(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
                    this.m_WrapperList.getM_employees().remove(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
                    this.mListVIewColaboradoresManagers.requestFocus();
+                   removeEmployee(this.mListVIewColaboradoresManagers.getSelectionModel().getSelectedItem());
                }
             }
             else if (result.get().equals(ButtonType.CANCEL))
@@ -1034,13 +1083,600 @@ public class RolDePagosView extends Application {
                 this.mListVIewColaboradoresManagers.requestFocus();
             }
         });
+
+
+
+        //! OJO Seccion encarga de carga y descarga de archivos del sistema
+        this.importarDatosBinario = (Button) root.lookup("#importarDatosBinario");
+        this.exportarDatosBinario = (Button) root.lookup("#exportarDatosBinario");
+        this.importarDatosCSV = (Button) root.lookup("#importarDatosCSV");
+        this.exportarDatosCSV = (Button) root.lookup("#exportarDatosCSV");
+        this.importarDatosXML = (Button) root.lookup("#importarDatosXML");
+        this.exportarDatosXML = (Button) root.lookup("#exportarDatosXML");
+        this.importarDatosJSON = (Button) root.lookup("#importarDatosJSON");
+        this.exportarDatosJSON = (Button) root.lookup("#exportarDatosJSON");
+        this.eliminarDatos = (Button) root.lookup("#eliminarDatos");
+        this.exportarDatosTributarios = (Button) root.lookup("#exportarDatosTributarios");
+        this.descargaInformacionTributariaRadioButton = (RadioButton) root.lookup("#descargaInformacionTributariaRadioButton");
+        this.descargaInformacionTributariaYSueldosRadioButton = (RadioButton) root.lookup("#descargaInformacionTributariaYSueldosRadioButton");
+        this.descargaInformacionSueldosLiquidosMenoresRadioButton = (RadioButton) root.lookup("#descargaInformacionSueldosLiquidosMenoresRadioButton");
+        this.descargaGerentesToggleButton = (RadioButton) root.lookup("#descargaGerentesToggleButton");
+        this.descargaGeneralToggleButton = (RadioButton) root.lookup("#descargaGeneralToggleButton");
+        this.descargaColaboradoresToggleButton = (RadioButton) root.lookup("#descargaColaboradoresToggleButton");
+
+        //? Comenzamos con eliminar los datos
+        this.eliminarDatos.setOnMouseClicked( mouseHasBeenClickedToDelete ->
+        {
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Eliminacion de Datos Inminente");
+            confirmationAlert.setHeaderText("Estas seguro que quieres eliminar los datos?");
+            Optional<ButtonType> result = confirmationAlert.showAndWait();
+            if (result.isPresent() && (result.get() == ButtonType.OK))
+            {
+                this.EmployeeHolder.clear();
+                this.ManagerHolder.clear();
+                this.m_WrapperList.getM_employees().clear();
+                this.mListViewColaboradores.refresh();
+                this.mListVIewColaboradoresManagers.refresh();
+            }
+        });
+        //? Carga de Datos Binario
+        this.importarDatosBinario.setOnMouseClicked(loadingBinaryData ->
+        {
+            FileChooser internalOpenFileChooser = new FileChooser();
+            internalOpenFileChooser.setTitle("Seleccione su archivo Binario");
+            internalOpenFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt binary files","*.txt"));
+            try
+            {
+                File openedFile = internalOpenFileChooser.showOpenDialog(primaryStage);
+                if (openedFile != null) {
+                    //? Analizamos archivo abierto
+                    EmployeeListWrapper wrapper = ToBinarySerializer.deserializeFromBinary(openedFile);
+                    if (!this.m_WrapperList.getM_employees().isEmpty()) {
+                        this.m_WrapperList = null;
+                        this.EmployeeHolder.clear();
+                        this.ManagerHolder.clear();
+                        this.m_WrapperList = wrapper;
+                    } else {
+                        this.m_WrapperList = wrapper;
+                    }
+                    extracted();
+                }
+                
+            }
+            catch(FileNotFoundAlert fileNotFoundAlert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(IOException ioException)
+            {
+                this.fileNotFoundAlert.setTitle("Error de lectura");
+                this.fileNotFoundAlert.setContentText("El archivo fue encontrado, se pudo abrir, se pudo cargar al lector, pero su formato no corresponde con Binario.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(ClassNotFoundException foundException)
+            {
+                this.fileNotFoundAlert.setTitle("Error de lectura");
+                this.fileNotFoundAlert.setContentText("El archivo pudo ser leido pero su contenido no es el correcto, y requerido por la aplicacion");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(FileIsEmptyAlert fileIsEmptyAlert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo Vacio");
+                this.fileNotFoundAlert.setContentText("El archivo que intenta abrir esta vacio");
+                this.fileNotFoundAlert.showAndWait();
+            }
+        });
+
+        this.exportarDatosBinario.setOnMouseClicked(exportingBinaryData ->
+        {
+            FileChooser internalFileSaving = new FileChooser();
+            internalFileSaving.setTitle("Escoga donde guardar su documento");
+            internalFileSaving.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt binary file", "*.txt"));
+            try
+            {
+
+                File savedFile = internalFileSaving.showSaveDialog(primaryStage);
+                if (savedFile != null) {
+                    ToBinarySerializer.serializeToBinary(savedFile, this.m_WrapperList);
+                }
+            }
+            catch(FileNotFoundAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo, y por tanto fallo la escritura.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(IOException alert)
+            {
+                this.fileNotFoundAlert.setTitle("Error de escritura");
+                this.fileNotFoundAlert.setContentText("El archivo que se intento abrir fue encontrado, pero el sistema operativo \n" +
+                        "tuvo un error al escribir el header del archivo y fallo la escritura.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(IllegalStateException alert )
+            {
+                this.fileNotFoundAlert.setTitle("Error de escritura");
+                this.fileNotFoundAlert.setContentText("El archivo seleccionado fue encontrado, sin embargo, el proceso de serializacion fallo. Esto se puede dar por \n" +
+                        "1) Falta de Datos Internos de Empleados Para Serializar\n" +
+                        "2) Ha habido un error grave dentro del sistema y los empleados no se han registrado correctamente");
+                this.fileNotFoundAlert.showAndWait();
+            }
+        });
+        //? Procedemos con exporte e importe de datos en CSV
+        this.importarDatosCSV.setOnMouseClicked(importingCSVData ->
+        {
+            FileChooser helperImportingCSV = new FileChooser();
+            helperImportingCSV.setTitle("Seleccione su archivo CSV");
+            helperImportingCSV.getExtensionFilters().add(new FileChooser.ExtensionFilter("csv files", "*.csv"));
+            try
+            {
+
+                File openedFile = helperImportingCSV.showOpenDialog(primaryStage);
+                if (openedFile != null){
+                    EmployeeListWrapper wrapper = ToCSVSerializer.deserializeFromFile(openedFile);
+                    if (!this.m_WrapperList.getM_employees().isEmpty()) {
+                        this.m_WrapperList = null;
+                        this.EmployeeHolder.clear();
+                        this.ManagerHolder.clear();
+                        this.m_WrapperList = wrapper;
+                    } else {
+                        this.m_WrapperList = wrapper;
+                    }
+                    extracted();
+                }
+            }
+            catch(FileNotFoundAlert | FileNotFoundException alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                        "y por tanto fallo la lectura.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(FileIsEmptyAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo Vacio");
+                this.fileNotFoundAlert.setHeaderText("El archivo que intenta abrir fue encontrado por el sistema operativo, pero su extension es nula.\n" +
+                        "Por tanto, la deserializacion de CSV no puede continuar");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch (InvalidAttributeValueException e)
+            {
+                this.fileNotFoundAlert.setTitle("Error de lectura");
+                this.fileNotFoundAlert.setContentText("El archivo que se intento abrir fue encontrado, pero el sistema operativo \n" +
+                        "tuvo un error al leer el header del archivo y fallo la lectura.");
+            }
+            catch( IncorrectCSVFormat alert)
+            {
+                this.fileNotFoundAlert.setTitle("Error de lectura");
+                this.fileNotFoundAlert.setContentText("El archivo que se intento abrir fue encontrado, pero el formato del archivo es incorrecto.\n" +
+                        "Por tanto, fallo la lectura de datos");
+            }
+        });
+
+        this.exportarDatosCSV.setOnMouseClicked(exportingCSVData ->
+        {
+            FileChooser helperExportingCSV = new FileChooser();
+            helperExportingCSV.setTitle("Escoga donde guardar su documento");
+            helperExportingCSV.getExtensionFilters().add(new FileChooser.ExtensionFilter("csv files", "*.csv"));
+            try
+            {
+
+                File savedFile = helperExportingCSV.showSaveDialog(primaryStage);
+                if (savedFile != null) {
+                    ToCSVSerializer.serializeToFile(savedFile, this.m_WrapperList);
+                }
+            }
+            catch(FileNotFoundAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                        "y por tanto fallo la escritura.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(InvalidAttributeValueException alert)
+            {
+                this.fileNotFoundAlert.setTitle("Error de escritura");
+                this.fileNotFoundAlert.setContentText("El archivo seleccionado fue abierto correctamente. " +
+                        "Sin embargo, el sistema detecto,\n" +
+                        "que la base de datos de empleados esta vacia y por tanto no pudo continuar la serializacion");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(FileNotFoundException e)
+            {
+                this.fileNotFoundAlert.setTitle("Erro de escritura");
+                this.fileNotFoundAlert.setContentText("El archivo fue encontrado y creado. No obstante, el sistema operativo no \n" +
+                        "propicio de headers y buffers para su escritura por lo que la serializacion fallo.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+        });
+
+        //! Procedemos con la serializacion a XML
+        this.exportarDatosXML.setOnMouseClicked(exportingXMLData ->
+        {
+            FileChooser helperExportingXML = new FileChooser();
+            helperExportingXML.setTitle("Escoga donde guardar su documento");
+            helperExportingXML.getExtensionFilters().add(new FileChooser.ExtensionFilter("xml files", "*.xml"));
+            try
+            {
+
+                File savedFile = helperExportingXML.showSaveDialog(primaryStage);
+                if (savedFile != null) {
+                    if (!savedFile.exists()){savedFile.createNewFile();}
+                    ToXMLSerializer.serializeToFile(savedFile, this.m_WrapperList);
+                }
+            }
+            catch(FileIsEmptyAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Error de escritura");
+                this.fileNotFoundAlert.setContentText("El archivo enviado fue recibido correctamente, pero al momento de\n" +
+                        "serialziar, el sistema determino que la base de datos estaba vacia y por tanto el proceso fallo.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(IllegalArgumentException e)
+            {
+                this.fileNotFoundAlert.setTitle("Error de escritura");
+                this.fileNotFoundAlert.setContentText("El presente error representa una falla grave dentro de la serializacion a XML.\n" +
+                        "Si el error persiste, comuniquese con IT, informe de un error de JAXB en el proceso de serializacion");
+                this.fileNotFoundAlert.showAndWait();
+                e.printStackTrace();
+            }
+
+            catch(FileNotFoundAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                        "y por tanto fallo la escritura.");
+                this.fileNotFoundAlert.showAndWait();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        this.importarDatosXML.setOnMouseClicked(importingXMLData ->
+        {
+            FileChooser helperImportingXML = new FileChooser();
+            helperImportingXML.setTitle("Seleccione su archivo XML");
+            helperImportingXML.getExtensionFilters().add(new FileChooser.ExtensionFilter("xml files", "*.xml"));
+            try
+            {
+
+                File openedFile = helperImportingXML.showOpenDialog(primaryStage);
+                if (openedFile != null){
+                    EmployeeListWrapper wrapper = ToXMLSerializer.deserializeFromFile(openedFile);
+                    if (!this.m_WrapperList.getM_employees().isEmpty()) {
+                        this.m_WrapperList = null;
+                        this.EmployeeHolder.clear();
+                        this.ManagerHolder.clear();
+                        this.m_WrapperList = wrapper;
+                    } else {
+                        this.m_WrapperList = wrapper;
+                    }
+                    extracted();
+                }
+            }
+            catch(FileNotFoundAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo regsitrado en el sistema no pudo ser analizado correctamente.\n " +
+                        "Un error comun es que el archivo seleccionado haya sido eliminado por ser temporal en el Sistema operativo, sino\n" +
+                        "es muy probable que el archivo haya estado vacio y el sistema no pudo leerlo.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(IllegalArgumentException e)
+            {
+                this.fileNotFoundAlert.setTitle("Error de escritura");
+                this.fileNotFoundAlert.setContentText("El presente error representa una falla grave dentro de la serializacion a XML.\n" +
+                        "Si el error persiste, comuniquese con IT, informe de un error de JAXB en el proceso de serializacion");
+                this.fileNotFoundAlert.showAndWait();
+                e.printStackTrace();
+            }
+        });
+        //! Procedemos con serializacion JSON
+        this.importarDatosJSON.setOnMouseClicked(importingJSONData ->
+        {
+            FileChooser helperImportingJSON = new FileChooser();
+            helperImportingJSON.setTitle("Seleccione su archivo JSON");
+            helperImportingJSON.getExtensionFilters().add(new FileChooser.ExtensionFilter("json files", "*.json"));
+            try
+            {
+
+                File openedFile = helperImportingJSON.showOpenDialog(primaryStage);
+                if (openedFile != null){
+                    EmployeeListWrapper wrapper = ToJsonSerializer.deserializeFromFile(openedFile);
+                    if (!this.m_WrapperList.getM_employees().isEmpty()) {
+                        this.m_WrapperList = null;
+                        this.EmployeeHolder.clear();
+                        this.ManagerHolder.clear();
+                        this.m_WrapperList = wrapper;
+                    } else {
+                        this.m_WrapperList = wrapper;
+                    }
+                    extracted();
+                }
+            }
+            catch(FileNotFoundAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo regsitrado en el sistema no pudo ser analizado correctamente.\n " +
+                        "Un error comun es que el archivo seleccionado haya sido eliminado por ser temporal en el Sistema operativo, sino\n" +
+                        "es muy probable que el archivo haya estado vacio y el sistema no pudo leerlo.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(FileIsEmptyAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Error de lectura");
+                this.fileNotFoundAlert.setContentText("El archivo fue encontrado dentro del sistema, pero se encontro vacio,\n" +
+                        "por lo tanto no se pudo realizar una deserializacion y el proceso fallo.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(IllegalStateException e)
+            {
+                this.fileNotFoundAlert.setTitle("Error de lectura");
+                this.fileNotFoundAlert.setContentText("El presente error informa de un error dentro del proceso de deserializacion del archivo, " +
+                        "muy probablemente los datos fueron corrompidos, editados manualmente o se cargo un archivo no proveniente de la aplicacion");
+                this.fileNotFoundAlert.showAndWait();
+            }
+        });
+        this.exportarDatosJSON.setOnMouseClicked(exportingJSONData ->
+        {
+            FileChooser helperExportingJSON = new FileChooser();
+            helperExportingJSON.setTitle("Escoga donde guardar su documento");
+            helperExportingJSON.getExtensionFilters().add(new FileChooser.ExtensionFilter("json files", "*.json"));
+            try
+            {
+
+                File savedFile = helperExportingJSON.showSaveDialog(primaryStage);
+                if (savedFile != null) {
+                    ToJsonSerializer.serializeToFile(savedFile, this.m_WrapperList);
+                }
+            }
+            catch(FileNotFoundAlert alert)
+            {
+                this.fileNotFoundAlert.setTitle("Archivo no encontrado");
+                this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                        "y por tanto fallo la escritura.");
+                this.fileNotFoundAlert.showAndWait();
+            }
+            catch(IllegalArgumentException e)
+            {
+                this.fileNotFoundAlert.setTitle("Error Durante Serializacion");
+                this.fileNotFoundAlert.setHeaderText("Error Durante Serializacion");
+                this.fileNotFoundAlert.setContentText("El presente error muestra que hubo un mal manejo de datos durante la serializacion.\n" +
+                        "En general esto puede suceder si la base de datos de empleados esta  vacia. Favor revisar los datos.");
+            }
+        });
+
+        //! Procedemos a implementar la primera segmentacion de datos, impresion de sueldos desglosados a archivo
+        this.exportarDatosTributarios.setOnMouseClicked(eventOnClick ->
+        {
+            FileChooser chooser = new FileChooser();
+            chooser.setTitle("Escoga donde guardar su archivo txt.");
+            chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt files", "*.txt"));
+            if (this.descargaInformacionTributariaRadioButton.isSelected())
+            {
+                //TODO: Fill once tributary class is done
+            }
+            else if (this.descargaInformacionTributariaYSueldosRadioButton.isSelected())
+            {
+                File selectedFile = chooser.showSaveDialog(primaryStage);
+                if (this.descargaGeneralToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        try{
+                            ToSalaryReport.serializeSalaryDesgloseToFile(selectedFile, this.m_WrapperList.getM_employees());
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                        }
+                    }
+                }
+                else if (this.descargaColaboradoresToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        try{
+                            ToSalaryReport.serializeSalaryDesgloseToFile(selectedFile, this.EmployeeHolder);
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                else if (this.descargaGerentesToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        try{
+                            ToSalaryReport.serializeSalaryDesgloseToFile(selectedFile, this.ManagerHolder);
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                        }
+                    }
+                }
+            }
+            else if (this.descargaInformacionSueldosLiquidosMenoresRadioButton.isSelected())
+            {
+                File selectedFile = chooser.showSaveDialog(primaryStage);
+                if (this.descargaGeneralToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        List<Employee> filteredEmployees = new ArrayList<>();
+                        for(Employee em : this.m_WrapperList.getM_employees())
+                        {
+                            if (em.getM_sueldoEmployee() < 800f)
+                            {
+                                filteredEmployees.add(em);
+                            }
+                        }
+                        try {
+                            ToSalaryReport.serializeSalaryDesgloseToFile(selectedFile, filteredEmployees);
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                        }
+
+                    }
+                }
+                else if (this.descargaColaboradoresToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        List<Employee> filteredEmployees = new ArrayList<>();
+                        for(Employee em : this.EmployeeHolder)
+                        {
+                            if (em.getM_sueldoEmployee() < 800f)
+                            {
+                                filteredEmployees.add(em);
+                            }
+                        }
+                        try {
+                            ToSalaryReport.serializeSalaryDesgloseToFile(selectedFile, filteredEmployees);
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                        }
+                    }
+                }
+                else if (this.descargaGerentesToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        List<Employee> filteredEmployees = new ArrayList<>();
+                        for(Employee em : this.ManagerHolder)
+                        {
+                            if (em.getM_sueldoEmployee() < 800f)
+                            {
+                                filteredEmployees.add(em);
+                            }
+                        }
+                        try {
+                            ToSalaryReport.serializeSalaryDesgloseToFile(selectedFile, filteredEmployees);
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+
+
     }
 
+    private void extracted() {
+        this.m_WrapperList.getM_employees().forEach(employee ->
+        {
+            if(employee.toCSVString().split(",").length == 8)
+            {
+                this.ManagerHolder.add(employee);
+            }
+            else {
+                this.EmployeeHolder.add(employee);
+            }
+        });
 
 
+    }
+
+    private void updateTables(Employee mEmployee)
+    {
+        MenuItem item = new MenuItem(String.format(
+                "[%s]:%s,%s", String.valueOf(mEmployee.getM_codigoEmployee()), mEmployee.getM_apellidoEmployee(),
+                mEmployee.getM_nombreEmployee()));
+        item.setUserData(mEmployee);
+        this.selectorMenuItemsEmpleados.getMenus().getFirst().getItems().add(item);
+        this.selectorMenuItemsEmpleados.getMenus().getFirst().getItems().forEach(menuItem -> {
+            menuItem.setOnAction(actionEvent ->
+            {
+                // Clear previous content
+                tableDesgloseSalario.getItems().clear();
+                tableDesgloseSalario.getColumns().clear();
+
+                // Create columns for each attribute of Employee
+                TableColumn<Employee, String> IDcolumn = new TableColumn<>("ID");
+                TableColumn<Employee, String> NombreColumn = new TableColumn<>("Nombre");
+                TableColumn<Employee, String> ApellidoColumn = new TableColumn<>("Apellido");
+                TableColumn<Employee, String> SueldoColumn = new TableColumn<>("Sueldo");
+                TableColumn<Employee, String> sueldoLiquidoColumn = new TableColumn<>("Salario Liquido Mensual");
+                TableColumn<Employee, String> billetes20 = new TableColumn<>("Billetes de 20$");
+                TableColumn<Employee, String> billetes10 = new TableColumn<>("Billetes de 10$");
+                TableColumn<Employee, String> billetes5 = new TableColumn<>("Billetes de 5$");
+                TableColumn<Employee, String> billetes1 = new TableColumn<>("Billetes de 1$");
+                TableColumn<Employee, String> salarioTexto = new TableColumn<>("Salario Total Textual");
+                // Set how to populate each cell in the columns
+                IDcolumn.setCellValueFactory(data -> new SimpleStringProperty(
+                        String.valueOf(data.getValue().getM_codigoEmployee())));
+                NombreColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_nombreEmployee()));
+                ApellidoColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_apellidoEmployee()));
+                SueldoColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_sueldoEmployee().toString()));
+                sueldoLiquidoColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_SueldoMensual().toString()));
+                billetes20.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("20").toString()));
+                billetes10.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("10").toString()));
+                billetes5.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("5").toString()));
+                billetes1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("1").toString()));
+                salarioTexto.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_SueldoTexto()));
+
+                tableDesgloseSalario.getColumns().addAll(IDcolumn, NombreColumn, ApellidoColumn,
+                        SueldoColumn, sueldoLiquidoColumn, billetes20, billetes10, billetes5, billetes1, salarioTexto);
+                this.tableDesgloseSalario.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+
+                //? Anadimos empleados
+                tableDesgloseSalario.getItems().add((Employee) menuItem.getUserData());
+            });
+        });
+    }
+
+    private void removeEmployee(Employee mEmployee) {
+        ListIterator<MenuItem> iterator = this.selectorMenuItemsEmpleados.getMenus().getFirst().getItems().listIterator();
+
+        while (iterator.hasNext()) {
+            MenuItem currentItem = iterator.next();
+
+            if (currentItem.getUserData().equals(mEmployee)) {
+                iterator.remove();
+                break; // Assuming each Employee appears once
+            }
+        }
+        this.selectorMenuItemsEmpleados.requestFocus();
+    }
 
     public static void main(String[] args)
     {
         launch(args);
     }
 }
+

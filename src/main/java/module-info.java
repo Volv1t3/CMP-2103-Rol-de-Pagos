@@ -9,7 +9,10 @@ module RolDePagosMain {
     requires javafx.web;
     requires java.sql;
     requires json.simple;
+    requires java.desktop;
+    requires com.sun.xml.bind;
 
-    opens RolDePagos to javafx.fxml;
+    opens RolDePagos to javafx.fxml, java.xml.bind;
+    opens EmployeeAbstraction to java.xml.bind;
     exports RolDePagos;
 }

@@ -61,23 +61,21 @@ public class ToXMLSerializer {
             Marshaller marsh = context.createMarshaller();
 
             if (e_OutputFile.exists()){
-                if (e_OutputFile.length() != 0)
-                {
                     if (e_EmployeeList != null) {
                         if (!(e_EmployeeList.getM_employees().isEmpty())) {
                             marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
                             marsh.marshal(e_EmployeeList, e_OutputFile);
                             return true;
-                        } else {
+                        }
+                        else {
                             throw new IllegalStateException("El arreglo de empleados a serializar esta vacio.\n" +
                                     "Favor revisar su estructura de datos e ingresar un arreglo no vacio");
                         }
-                    } else {
+                    }
+                    else {
                         throw new IllegalStateException("El valor Ingresado Para el Parametro de empleados a serializar es nulo.\n" +
                                 "Favor revisar su estructura de datos e ingresar un arreglo no nulo");
                     }
-                }
-                else {throw new IllegalStateException();}
             }
             else {throw new FileNotFoundException();}
         }
@@ -115,7 +113,8 @@ public class ToXMLSerializer {
      * @throws IllegalArgumentException si durante la deserializacion ocurrio algun error de JAXB
      */
     @SuppressWarnings("unused")
-    public static EmployeeListWrapper deserializeFromFile(File e_InputFile) throws FileNotFoundAlert, IllegalArgumentException {
+    public static EmployeeListWrapper deserializeFromFile(File e_InputFile)
+            throws FileNotFoundAlert, IllegalArgumentException {
 
         try
         {
@@ -145,10 +144,6 @@ public class ToXMLSerializer {
         catch(JAXBException exception)
         {
             throw new IllegalArgumentException(exception.getMessage());
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
         }
     }
 }

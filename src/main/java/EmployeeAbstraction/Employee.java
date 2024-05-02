@@ -8,6 +8,8 @@ package EmployeeAbstraction;
  *===================================================================================================================**/
 
 /*? Directivas de Preprocesamiento*/
+import SalaryCalculations.MoneyPresentationHelper;
+
 import javax.naming.directory.InvalidAttributeValueException;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -87,6 +89,8 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
     @XmlTransient
     private static final Date maxHiringDate = Date.from(Instant.now());
 
+    @XmlTransient
+    private Map<String, Integer> M_desgloseSalarial = null;
 
     /*? Metodos Publicos de la Clase */
 
@@ -325,6 +329,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         if (e_SueldoEmpleado >= 800 && e_SueldoEmpleado <= 3500)
         {
             Employee.this.m_sueldoEmployee = e_SueldoEmpleado;
+            this.M_desgloseSalarial = MoneyPresentationHelper.calculateBills(e_SueldoEmpleado);
             return true;
         }
         else
@@ -400,6 +405,15 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
     public Long getM_DateEnNumero() {return Employee.this.m_DateEnNumero;}
 
 
+
+    //?Metodo para retornar un valor contenido dentro del arreglo para desglose salarial
+    public Integer getM_DesgloseData(String key) {return this.M_desgloseSalarial.get(key);}
+
+    //? Metodo Para retornar sueldo mensual entero
+    public Integer getM_SueldoMensual() {return Integer.valueOf(Math.round(this.getM_sueldoEmployee()) / 12);}
+
+    //? metodo para retornar sueldo en texto
+    public String getM_SueldoTexto() {return MoneyPresentationHelper.transformMoneyToText(this.getM_sueldoEmployee());}
     //? Procedemos a Implementar el Metodo to String
     /**
      * Este método sobreescribe el método toString y devuelve una representación string de un empleado.
@@ -538,4 +552,5 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         CSVrepresentation.append(this.m_DesgloceSalarioEmployee.toString());
         return CSVrepresentation.toString();
     }
+
 }

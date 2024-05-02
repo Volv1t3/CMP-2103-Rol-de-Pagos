@@ -15,7 +15,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -374,41 +373,167 @@
             <content>
                <AnchorPane prefHeight="200.0" prefWidth="200.0">
                   <children>
-                     <SplitPane dividerPositions="0.4642857142857143" layoutX="168.0" layoutY="134.0" prefHeight="555.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <items>
-                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <SplitPane dividerPositions="0.25" layoutX="595.0" layoutY="228.0" prefHeight="761.0" prefWidth="1590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                       <items>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                               <children>
-                                 <SplitPane layoutX="25.0" layoutY="166.0" prefHeight="553.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <items>
-                                       <Separator prefWidth="268.0" />
-                                    </items>
+                                 <SplitPane dividerPositions="0.5" layoutX="32.0" layoutY="64.0" orientation="VERTICAL" prefHeight="759.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                   <items>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+                                          <children>
+                                             <VBox alignment="CENTER" layoutX="145.0" layoutY="58.0" prefHeight="300.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <children>
+                                                   <TextFlow prefHeight="24.0" prefWidth="316.0" textAlignment="CENTER">
+                                                      <children>
+                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionHeaders" text="Descarga De Datos Financieros" textAlignment="CENTER" />
+                                                      </children>
+                                                   </TextFlow>
+                                                   <TextFlow textAlignment="CENTER">
+                                                      <children>
+                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="Selector Personal A Exportar" textAlignment="CENTER" />
+                                                      </children>
+                                                   </TextFlow>
+                                                   <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="10.0" vgap="10.0">
+                                                      <children>
+                                                         <RadioButton fx:id="descargaGerentesToggleButton" mnemonicParsing="false" text="Descarga Gerentes ">
+                                                            <toggleGroup>
+                                                               <ToggleGroup fx:id="descargaTributariaColaboradores" />
+                                                            </toggleGroup>
+                                                         </RadioButton>
+                                                         <RadioButton fx:id="descargaGeneralToggleButton" mnemonicParsing="false" text="Descarga General" toggleGroup="$descargaTributariaColaboradores" />
+                                                         <RadioButton fx:id="descargaColaboradoresToggleButton" mnemonicParsing="false" text="Descarga Colaboradores" toggleGroup="$descargaTributariaColaboradores" />
+                                                      </children>
+                                                      <VBox.margin>
+                                                         <Insets />
+                                                      </VBox.margin>
+                                                   </FlowPane>
+                                                   <TextFlow textAlignment="CENTER">
+                                                      <children>
+                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionTextFields" text="Selector de Formato De Exportacion" textAlignment="CENTER" />
+                                                      </children>
+                                                   </TextFlow>
+                                                   <VBox alignment="CENTER" spacing="10.0">
+                                                      <children>
+                                                         <RadioButton fx:id="descargaInformacionTributariaRadioButton" mnemonicParsing="false" text="Descarga Informacion Tributaria Sola">
+                                                            <toggleGroup>
+                                                               <ToggleGroup fx:id="selectorFormatoDescargaTributaria" />
+                                                            </toggleGroup>
+                                                         </RadioButton>
+                                                         <RadioButton fx:id="descargaInformacionTributariaYSueldosRadioButton" mnemonicParsing="false" text="Descarga Informacion Sueldo Mensual y Desglose" toggleGroup="$selectorFormatoDescargaTributaria" wrapText="true" />
+                                                         <RadioButton fx:id="descargaInformacionSueldosLiquidosMenoresRadioButton" mnemonicParsing="false" text="Descarga Informacion de Sueldos Liquidos Menores a 800$" textAlignment="CENTER" toggleGroup="$selectorFormatoDescargaTributaria" wrapText="true" />
+                                                      </children>
+                                                   </VBox>
+                                                   <Button fx:id="exportarDatosTributarios" mnemonicParsing="false" text="Exportar Datos" />
+                                                </children>
+                                             </VBox>
+                                          </children>
+                                       </AnchorPane>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+                                          <children>
+                                             <VBox alignment="CENTER" layoutX="94.0" layoutY="96.0" prefHeight="375.0" prefWidth="313.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <children>
+                                                   <TextFlow textAlignment="CENTER">
+                                                      <children>
+                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="aboutSectionHeaders" text="Carga/Descarga de Datos Según Formato" textAlignment="CENTER" />
+                                                      </children>
+                                                   </TextFlow>
+                                                   <FlowPane alignment="CENTER" columnHalignment="CENTER">
+                                                      <children>
+                                                         <Button fx:id="eliminarDatos" mnemonicParsing="false" text="Elminar Todos Los Datos" textAlignment="CENTER" />
+                                                      </children>
+                                                   </FlowPane>
+                                                   <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" vgap="20.0">
+                                                      <children>
+                                                         <Button fx:id="importarDatosBinario" mnemonicParsing="false" text="Importar Datos Binario" />
+                                                         <Button fx:id="exportarDatosBinario" layoutX="99.0" layoutY="98.0" mnemonicParsing="false" text="Exportar Datos Binario" />
+                                                         <Button fx:id="importarDatosCSV" layoutX="26.0" layoutY="98.0" mnemonicParsing="false" text="Importar Datos CSV" />
+                                                         <Button fx:id="exportarDatosCSV" layoutX="173.0" layoutY="75.0" mnemonicParsing="false" text="Exportar Datos CSV" />
+                                                         <Button fx:id="importarDatosXML" layoutX="42.0" layoutY="120.0" mnemonicParsing="false" text="Importar Datos XML" />
+                                                         <Button fx:id="exportarDatosXML" layoutX="173.0" layoutY="98.0" mnemonicParsing="false" text="Exportar Datos XML" />
+                                                         <Button fx:id="importarDatosJSON" layoutX="40.0" layoutY="143.0" mnemonicParsing="false" text="Importar Datos JSON" />
+                                                         <Button fx:id="exportarDatosJSON" layoutX="173.0" layoutY="120.0" mnemonicParsing="false" text="Exportar Datos JSON" />
+                                                      </children>
+                                                   </FlowPane>
+                                                </children>
+                                             </VBox>
+                                          </children>
+                                       </AnchorPane>
+                                   </items>
                                  </SplitPane>
                               </children>
                            </AnchorPane>
-                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                               <children>
-                                 <SplitPane dividerPositions="0.5" layoutX="21.0" layoutY="14.0" orientation="VERTICAL" prefHeight="553.0" prefWidth="312.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <items>
-                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="759.0" prefWidth="1188.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                   <items>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                           <children>
-                                             <TableView editable="true" layoutX="21.0" layoutY="29.0" prefHeight="273.0" prefWidth="310.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                <columns>
-                                                   <TableColumn prefWidth="75.0" text="C1" />
-                                                   <TableColumn prefWidth="75.0" text="C2" />
-                                                </columns>
-                                             </TableView>
+                                             <ScrollPane>
+                                                <content>
+                                                   <TableView prefHeight="759.0" prefWidth="1267.0">
+                                                      <columns>
+                                                         <TableColumn editable="false" prefWidth="33.0" text="ID " />
+                                                         <TableColumn prefWidth="100.0" text="Nombre" />
+                                                         <TableColumn prefWidth="100.0" text="Apellido" />
+                                                         <TableColumn prefWidth="150.0" text="Sueldo Total + Comision" />
+                                                         <TableColumn prefWidth="120.0" text="Aporte Al IESS" />
+                                                         <TableColumn prefWidth="160.0" text="Retencion Impuesto Renta" />
+                                                         <TableColumn prefWidth="120.0" text="Fondo de Reserva" />
+                                                         <TableColumn prefWidth="120.0" text="Decimo Tercero" />
+                                                         <TableColumn prefWidth="120.0" text="Decimo Cuarto" />
+                                                         <TableColumn prefWidth="100.0" text="Sueldo Liquido" />
+                                                         <TableColumn prefWidth="160.0" text="Sueldo En Palabras" />
+                                                      </columns>
+                                                      <columnResizePolicy>
+                                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                      </columnResizePolicy>
+                                                   </TableView>
+                                                </content>
+                                             </ScrollPane>
                                           </children>
                                        </AnchorPane>
-                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                           <children>
-                                             <ListView layoutX="14.0" layoutY="-13.0" prefHeight="272.0" prefWidth="310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             <BorderPane layoutX="192.0" layoutY="88.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <top>
+                                                   <MenuBar fx:id="selectorMenuItemsEmpleados" BorderPane.alignment="CENTER">
+                                                     <menus>
+                                                       <Menu fx:id="selectorMenuItemsEmpleados" mnemonicParsing="false" text="Seleccionar Empleado Single Analysis" />
+                                                     </menus>
+                                                   </MenuBar>
+                                                </top>
+                                                <center>
+                                                   <ScrollPane hbarPolicy="ALWAYS" prefHeight="283.0" prefWidth="1044.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+                                                      <content>
+                                                         <TableView fx:id="tableDesgloseSalario" prefHeight="349.0" prefWidth="1187.0">
+                                                           <columns>
+                                                             <TableColumn fx:id="tableViewDesgloseID" prefWidth="57.0" style="-fx-font-size: 8pt;" text="ID" />
+                                                             <TableColumn fx:id="tableViewLname" prefWidth="122.0" style="-fx-font-size: 8pt;" text="Nombre" />
+                                                               <TableColumn fx:id="tableviewDesgloseName" prefWidth="122.0" style="-fx-font-size: 8pt;" text="Apellido" />
+                                                               <TableColumn fx:id="tableSalarioEmpleado" prefWidth="155.0" style="-fx-font-size: 8pt;" text="Salario Empleado" />
+                                                               <TableColumn fx:id="tableSalarioLiquido" prefWidth="143.0" style="-fx-font-size: 8pt;" text="Salario Liquido Empleado" />
+                                                               <TableColumn prefWidth="118.0" style="-fx-font-size: 8pt;" text="Desglose:" />
+                                                               <TableColumn fx:id="tableview20Notes" prefWidth="75.0" style="-fx-font-size: 10;" text="Billetes de 20$" />
+                                                               <TableColumn fx:id="tableview10Notes" prefWidth="75.0" style="-fx-font-size: 8pt;" text="Billetes de 10$" />
+                                                               <TableColumn fx:id="tableview5Notes" prefWidth="75.0" style="-fx-font-size: 8pt;" text="Billetes de 5$" />
+                                                               <TableColumn fx:id="tableview1Notes" prefWidth="75.0" style="-fx-font-size: 8pt;" text="Billetes de 1$" />
+                                                               <TableColumn fx:id="tableviewSalarioTexto" prefWidth="132.0" style="-fx-font-size: 8pt;" text="Salario Total Textual" />
+                                                           </columns>
+                                                         </TableView>
+                                                      </content>
+                                                      <BorderPane.margin>
+                                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                      </BorderPane.margin>
+                                                   </ScrollPane>
+                                                </center>
+                                             </BorderPane>
                                           </children>
                                        </AnchorPane>
-                                    </items>
+                                   </items>
                                  </SplitPane>
                               </children>
                            </AnchorPane>
-                        </items>
+                       </items>
                      </SplitPane>
                   </children>
                </AnchorPane>

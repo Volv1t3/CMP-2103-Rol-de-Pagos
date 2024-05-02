@@ -1,4 +1,3 @@
-import CustomExceptions.FileNotFoundAlert;
 import EmployeeAbstraction.*;
 import Serialization.ToCSVSerializer;
 
@@ -161,8 +160,8 @@ public class TestCSVFormatting {
 
 
         //? lets generate a new CSV File
-        File results = new File ("./Results.csv");
-        try (PrintWriter printWriter = new PrintWriter("results.csv"))
+        File results = new File ("RolDePagos/results.csv");
+        try (PrintWriter printWriter = new PrintWriter("RolDePagos/results.csv"))
         {
 
             Employee employee1 = new Employee("Luis", "Arellano", 1,

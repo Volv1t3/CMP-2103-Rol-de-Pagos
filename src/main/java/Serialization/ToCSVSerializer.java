@@ -68,10 +68,10 @@ public class ToCSVSerializer {
      * @throws InvalidAttributeValueException  Se lanza si la lista de empleados proporcionada esta vacia.
      * @throws FileNotFoundException            Se lanza si no se puede abrir el archivo para escritura.
      */
-    public static boolean serializeToFile(File e_OutputFile, EmployeeListWrapper e_EmployeeList) throws
-
-
-            FileNotFoundAlert, InvalidAttributeValueException, FileNotFoundException {
+    public static boolean serializeToFile(File e_OutputFile, EmployeeListWrapper e_EmployeeList)
+            throws
+            FileNotFoundAlert, InvalidAttributeValueException,
+            FileNotFoundException {
         if ((e_OutputFile.exists()))
         {
             if (!(e_EmployeeList.getM_employees().isEmpty()))
