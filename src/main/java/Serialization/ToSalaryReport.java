@@ -69,8 +69,38 @@ public class ToSalaryReport {
     }
 
 
-    public static boolean serializeTributaryDesgloseToFile(File e_OutPut, List<Employee> e_EmployeeList)
-    {
+    public static boolean serializeTributaryDesgloseToFile(File e_OutputFile, List<Employee> e_EmployeeList)
+            throws FileNotFoundAlert, FileNotFoundException {
+        try{
+            if (!e_OutputFile.exists()){e_OutputFile.createNewFile();}
+        }
+        catch(IOException e)
+        {
+            throw new FileNotFoundAlert();
+        }
+
+        try (PrintWriter pt = new PrintWriter(e_OutputFile))
+        {
+            pt.printf("%-15s %-20s %-20s%-20s %-30s %-30s %-30s %-30s\n", "ID Empleado", "Nombre Empleado","Apellido Empleado", "Aporte Al IESS", "Aporte Impuesto Renta",
+                    "Aporte Fondo De Reserva","Aporte Decimo Tercero", "Aporte Decimo Cuarto");
+
+            for(Employee empleado: e_EmployeeList)
+            {
+                Map<String, Integer> salarioDesplose = MoneyPresentationHelper.calculateBills(empleado.getM_sueldoEmployee());
+
+                pt.printf("%-15s %-20s %-20s%-20s %-30s %-30s %-30s %-30s\n",
+                        empleado.getM_codigoEmployee(), empleado.getM_nombreEmployee(), empleado.getM_apellidoEmployee(),
+                        empleado.getM_MapEntry("AporteIESS"), empleado.getM_MapEntry("AporteRenta"),
+                        empleado.getM_MapEntry("AporteFondoReserva"), empleado.getM_MapEntry("AporteDecimoTercero"),
+                        empleado.getM_MapEntry("AporteDecimoCuarto")
+                        );
+            }
+
+        }
+        catch(FileNotFoundException e)
+        {
+            throw new FileNotFoundException();
+        }
         return true;
     }
 }

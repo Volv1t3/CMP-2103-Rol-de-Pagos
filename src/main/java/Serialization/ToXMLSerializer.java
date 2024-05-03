@@ -55,6 +55,12 @@ public class ToXMLSerializer {
     public static boolean serializeToFile(File e_OutputFile, EmployeeListWrapper e_EmployeeList)
 
             throws FileNotFoundAlert, IllegalArgumentException, FileIsEmptyAlert {
+        try
+        {
+            if (!e_OutputFile.exists()){e_OutputFile.createNewFile();}
+        }
+        catch (IOException e){throw new RuntimeException(e);}
+
         try{
             //? Paso Base 1: Generamos Dos clases, JAXBContext y Marshaller para enviar los datos hacia el archivo
             JAXBContext context = JAXBContext.newInstance(EmployeeListWrapper.class);

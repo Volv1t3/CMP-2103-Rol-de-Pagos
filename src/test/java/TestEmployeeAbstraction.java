@@ -37,7 +37,7 @@ public class TestEmployeeAbstraction {
             {
                 System.out.println("Employee Contract Date: " + employee.getM_fechaContratacionEmployee());
             }
-            if (employee.setM_MapEntry(Map.entry("DecimoTercero", BigDecimal.valueOf(2400f))))
+            if (employee.setM_MapEntry(Map.entry("DecimoTercero", 2400)))
             {
                 System.out.println("Employee Map Entry: " + employee.getM_MapEntry("DecimoTercero"));
             }

@@ -8,6 +8,8 @@ import CustomExceptions.IncorrectCSVFormat;
 import EmployeeAbstraction.Employee;
 import EmployeeAbstraction.EmployeeListWrapper;
 import EmployeeAbstraction.Manager;
+import SalaryCalculations.MoneyPresentationHelper;
+import SalaryCalculations.MonthlySalaryHelper;
 import Serialization.*;
 import com.sun.xml.bind.v2.model.core.ID;
 import javafx.application.Application;
@@ -29,6 +31,7 @@ import javax.swing.plaf.multi.MultiInternalFrameUI;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -82,13 +85,14 @@ public class RolDePagosView extends Application {
     private RadioButton descargaGeneralToggleButton;
     private RadioButton descargaColaboradoresToggleButton;
     private MenuBar selectorMenuItemsEmpleados;
-
     private TableView<Employee> tableDesgloseSalario;
+    private TableView<Employee> desgloseIESSEmpleados;
 
     @Override
     public void init() throws Exception {
         //? Vamos A Cargar Un Archivo CSV Directamente a la aplicacion para su manipulacion
-        this.m_WrapperList = ToCSVSerializer.deserializeFromFile( new File("src/main/java/RolDePagos/results.csv"));
+        String employeeCSVFilePath = Paths.get(System.getProperty("user.dir"), "src","main","java", "RolDePagos", "empleadosPrueba.csv").toString();
+        this.m_WrapperList = ToCSVSerializer.deserializeFromFile( new File(employeeCSVFilePath));
         this.ManagerHolder = new ArrayList<>();
         this.EmployeeHolder = new ArrayList<>();
         this.m_WrapperList.getM_employees().forEach(employee ->
@@ -111,11 +115,14 @@ public class RolDePagosView extends Application {
         ; primaryStage.setTitle("eVolvLabs - Rol de Pagos 1.0");
 
         //? Cargamos el Scene desde FXMl
-        File rootcontent = new File("src/main/java/RolDePagos/RolDePagosView.fxml");
+        String FXMLsource = Paths.get(System.getProperty("user.dir"), "src","main","java", "RolDePagos", "RolDePagosView.fxml").toString();
+        File rootcontent = new File(FXMLsource);
         Scene root = FXMLLoader.load((rootcontent.toURI().toURL()));
         primaryStage.setScene(root); primaryStage.show();
 
         this.tableDesgloseSalario = (TableView<Employee>) root.lookup("#tableDesgloseSalario");
+        this.desgloseIESSEmpleados = (TableView<Employee>) root.lookup("#desgloseIESSEmpleados");
+        updateIESSTable(this.m_WrapperList.getM_employees());
         this.selectorMenuItemsEmpleados = (MenuBar) root.lookup("#selectorMenuItemsEmpleados");
         for(Employee em : this.m_WrapperList.getM_employees())
         {
@@ -326,6 +333,7 @@ public class RolDePagosView extends Application {
                         this.mListViewColaboradores.requestFocus();
                         this.mListViewColaboradores.refresh();
                         updateTables(dummyEmployee);
+                        updateIESSTable(this.m_WrapperList.getM_employees());
                     }
 
                 }
@@ -550,6 +558,7 @@ public class RolDePagosView extends Application {
                         this.mListVIewColaboradoresManagers.requestFocus();
                         this.mListVIewColaboradoresManagers.refresh();
                         updateTables(dummyManager);
+                        updateIESSTable(this.m_WrapperList.getM_employees());
                     }
                 }
                 if (this.mColaboradorRadioButton.isSelected() && !(this.mListViewColaboradores.getSelectionModel().isEmpty()))
@@ -657,7 +666,9 @@ public class RolDePagosView extends Application {
                         this.mListVIewColaboradoresManagers.refresh();
 
                     }
-
+                    updateIESSTable(this.m_WrapperList.getM_employees());
+                    removeEmployee(toModify);
+                    updateTables(toModify);
                 }
                 else if (this.mGerenteRadioButton.isSelected() && !(this.mListVIewColaboradoresManagers.getSelectionModel().isEmpty()))
                 {
@@ -836,6 +847,9 @@ public class RolDePagosView extends Application {
                     if (!error_Flag) {
                         this.mListVIewColaboradoresManagers.requestFocus();
                         this.mListVIewColaboradoresManagers.refresh();
+                        updateIESSTable(this.m_WrapperList.getM_employees());
+                        removeEmployee(toModify);
+                        updateTables(toModify);
                     }
                 }
         });
@@ -856,6 +870,7 @@ public class RolDePagosView extends Application {
                    this.m_WrapperList.getM_employees().remove(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
                    this.mListViewColaboradores.requestFocus();
                    removeEmployee(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
+                   updateIESSTable(this.m_WrapperList.getM_employees());
                }
                else if (this.mGerenteRadioButton.isSelected())
                {
@@ -863,6 +878,7 @@ public class RolDePagosView extends Application {
                    this.m_WrapperList.getM_employees().remove(this.mListViewColaboradores.getSelectionModel().getSelectedItem());
                    this.mListVIewColaboradoresManagers.requestFocus();
                    removeEmployee(this.mListVIewColaboradoresManagers.getSelectionModel().getSelectedItem());
+                   updateIESSTable(this.m_WrapperList.getM_employees());
                }
             }
             else if (result.get().equals(ButtonType.CANCEL))
@@ -1118,6 +1134,7 @@ public class RolDePagosView extends Application {
                 this.m_WrapperList.getM_employees().clear();
                 this.mListViewColaboradores.refresh();
                 this.mListVIewColaboradoresManagers.refresh();
+                updateIESSTable(this.m_WrapperList.getM_employees());
             }
         });
         //? Carga de Datos Binario
@@ -1140,6 +1157,7 @@ public class RolDePagosView extends Application {
                     } else {
                         this.m_WrapperList = wrapper;
                     }
+                    updateIESSTable(this.m_WrapperList.getM_employees());
                     extracted();
                 }
                 
@@ -1225,6 +1243,7 @@ public class RolDePagosView extends Application {
                     } else {
                         this.m_WrapperList = wrapper;
                     }
+                    updateIESSTable(this.m_WrapperList.getM_employees());
                     extracted();
                 }
             }
@@ -1354,6 +1373,7 @@ public class RolDePagosView extends Application {
                     } else {
                         this.m_WrapperList = wrapper;
                     }
+                    updateIESSTable(this.m_WrapperList.getM_employees());
                     extracted();
                 }
             }
@@ -1394,6 +1414,7 @@ public class RolDePagosView extends Application {
                     } else {
                         this.m_WrapperList = wrapper;
                     }
+                    updateIESSTable(this.m_WrapperList.getM_employees());
                     extracted();
                 }
             }
@@ -1457,7 +1478,56 @@ public class RolDePagosView extends Application {
             chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt files", "*.txt"));
             if (this.descargaInformacionTributariaRadioButton.isSelected())
             {
-                //TODO: Fill once tributary class is done
+                File selectedFile = chooser.showSaveDialog(primaryStage);
+                if (this.descargaGeneralToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        try{
+                            ToSalaryReport.serializeTributaryDesgloseToFile(selectedFile, this.m_WrapperList.getM_employees());
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                        }
+                    }
+                }
+                else if (this.descargaColaboradoresToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        try{
+                            ToSalaryReport.serializeTributaryDesgloseToFile(selectedFile, this.EmployeeHolder);
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                else if (this.descargaGerentesToggleButton.isSelected())
+                {
+                    if (selectedFile != null)
+                    {
+                        try{
+                            ToSalaryReport.serializeTributaryDesgloseToFile(selectedFile, this.ManagerHolder);
+                        }
+                        catch(FileNotFoundAlert | FileNotFoundException e)
+                        {
+                            this.fileNotFoundAlert.setTitle("Error de escritura");
+                            this.fileNotFoundAlert.setContentText("El archivo que intenta abrir no fue encontrado dentro del sistema operativo,\n" +
+                                    "y por tanto fallo la escritura.");
+                            this.fileNotFoundAlert.showAndWait();
+                        }
+                    }
+                }
             }
             else if (this.descargaInformacionTributariaYSueldosRadioButton.isSelected())
             {
@@ -1522,7 +1592,7 @@ public class RolDePagosView extends Application {
                         List<Employee> filteredEmployees = new ArrayList<>();
                         for(Employee em : this.m_WrapperList.getM_employees())
                         {
-                            if (em.getM_sueldoEmployee() < 800f)
+                            if (em.getM_SueldoMensual() < 800f)
                             {
                                 filteredEmployees.add(em);
                             }
@@ -1547,7 +1617,7 @@ public class RolDePagosView extends Application {
                         List<Employee> filteredEmployees = new ArrayList<>();
                         for(Employee em : this.EmployeeHolder)
                         {
-                            if (em.getM_sueldoEmployee() < 800f)
+                            if (em.getM_SueldoMensual() < 800f)
                             {
                                 filteredEmployees.add(em);
                             }
@@ -1571,7 +1641,7 @@ public class RolDePagosView extends Application {
                         List<Employee> filteredEmployees = new ArrayList<>();
                         for(Employee em : this.ManagerHolder)
                         {
-                            if (em.getM_sueldoEmployee() < 800f)
+                            if (em.getM_SueldoMensual() < 800f)
                             {
                                 filteredEmployees.add(em);
                             }
@@ -1612,6 +1682,55 @@ public class RolDePagosView extends Application {
 
     }
 
+    private void updateIESSTable(List<Employee> employees)
+    {
+        employees.forEach(MonthlySalaryHelper::addCalculatedEntries);
+        this.desgloseIESSEmpleados.getItems().clear();
+        this.desgloseIESSEmpleados.getColumns().clear();
+
+        //? Anadimos las columnas y los empleados
+        TableColumn<Employee, String> IDcolumn = new TableColumn<>("ID");
+        TableColumn<Employee, String> NombreColumn = new TableColumn<>("Nombre");
+        TableColumn<Employee, String> ApellidoColumn = new TableColumn<>("Apellido");
+        TableColumn<Employee, String> SueldoColumn = new TableColumn<>("Sueldo");
+        TableColumn<Employee, String> AporteIESS = new TableColumn<>("Aporte Al IESS");
+        TableColumn<Employee, String> AporteRenta = new TableColumn<>("Aporte Impuesto Renta");
+        TableColumn<Employee, String> AporteReserva = new TableColumn<>("Aporte Fondo de Reserva");
+        TableColumn<Employee, String> AporteDecimoTercero = new TableColumn<>("Aporte Decimo Tercero");
+        TableColumn<Employee, String> AporteDecimoCuarto = new TableColumn<>("Aporte Decimo Cuarto");
+        TableColumn<Employee, String> sueldoLiquido = new TableColumn<>("Sueldo Liquido");
+        TableColumn<Employee, String> sueldoTexto = new TableColumn<>("Sueldo En Palabras");
+
+        //! Anadimos property mappings
+        IDcolumn.setCellValueFactory(data -> new SimpleStringProperty(
+                String.valueOf(data.getValue().getM_codigoEmployee())));
+        NombreColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_nombreEmployee()));
+        ApellidoColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_apellidoEmployee()));
+        SueldoColumn.setCellValueFactory(data ->
+        {
+            String[] split = data.getValue().toCSVString().split(",");
+            if (split.length == ToCSVSerializer.AMOUNT_PARSED_FIELDS_BASE_EMPLOYEE) {
+                return new SimpleStringProperty(data.getValue().getM_sueldoEmployee().toString());
+            } else {
+                return new SimpleStringProperty(
+                        Float.valueOf(data.getValue().getM_sueldoEmployee() + Float.parseFloat(split[7])).toString()
+                );
+            }
+        });
+
+        AporteIESS.setCellValueFactory(data  -> new SimpleStringProperty(data.getValue().getM_MapEntry("AporteIESS").toString()));
+        AporteRenta.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_MapEntry("AporteRenta").toString()));
+        AporteReserva.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_MapEntry("AporteFondoReserva").toString()));
+        AporteDecimoTercero.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_MapEntry("AporteDecimoTercero").toString()));
+        AporteDecimoCuarto.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_MapEntry("AporteDecimoCuarto").toString()));
+        sueldoLiquido.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_SueldoMensual().toString()));
+        sueldoTexto.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_SueldoTexto()));
+
+        //! Anadimos los datos
+        this.desgloseIESSEmpleados.getColumns().addAll(IDcolumn, NombreColumn, ApellidoColumn, SueldoColumn,
+                AporteIESS, AporteRenta, AporteReserva, AporteDecimoTercero, AporteDecimoCuarto, sueldoLiquido, sueldoTexto);
+        this.desgloseIESSEmpleados.getItems().addAll(employees);
+    }
     private void updateTables(Employee mEmployee)
     {
         MenuItem item = new MenuItem(String.format(
@@ -1644,10 +1763,11 @@ public class RolDePagosView extends Application {
                 ApellidoColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_apellidoEmployee()));
                 SueldoColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_sueldoEmployee().toString()));
                 sueldoLiquidoColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_SueldoMensual().toString()));
-                billetes20.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("20").toString()));
-                billetes10.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("10").toString()));
-                billetes5.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("5").toString()));
-                billetes1.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_DesgloseData("1").toString()));
+                Map<String, Integer> desglosePorBilletes = MoneyPresentationHelper.calculateBills(( (Employee) menuItem.getUserData()).getM_sueldoEmployee());
+                billetes20.setCellValueFactory(data -> new SimpleStringProperty(desglosePorBilletes.get("20").toString()));
+                billetes10.setCellValueFactory(data -> new SimpleStringProperty(desglosePorBilletes.get("10").toString()));
+                billetes5.setCellValueFactory(data -> new SimpleStringProperty(desglosePorBilletes.get("5").toString()));
+                billetes1.setCellValueFactory(data -> new SimpleStringProperty(desglosePorBilletes.get("1").toString()));
                 salarioTexto.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getM_SueldoTexto()));
 
                 tableDesgloseSalario.getColumns().addAll(IDcolumn, NombreColumn, ApellidoColumn,

@@ -4,7 +4,6 @@ import Serialization.ToCSVSerializer;
 import javax.naming.directory.InvalidAttributeValueException;
 import java.io.File;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -36,7 +35,7 @@ public class TestCSVFormatting {
             if (employee.setM_fechaContratacionEmployee(time)) {
                 System.out.println("Employee Contract Date: " + employee.getM_fechaContratacionEmployee());
             }
-            if (employee.setM_MapEntry(Map.entry("DecimoTercero", BigDecimal.valueOf(2400f)))) {
+            if (employee.setM_MapEntry(Map.entry("DecimoTercero", 2400))) {
                 System.out.println("Employee Map Entry: " + employee.getM_MapEntry("DecimoTercero"));
             }
             System.out.printf("toString() Normal de Employee: %s\n", employee);
@@ -97,7 +96,7 @@ public class TestCSVFormatting {
                     System.out.println(Arrays.stream(internalMapKeyValuePairs).toList().toString());
                     if (internalMapKeyValuePairs.length != 0) {
                         for (int i = 0; i < internalMapKeyValuePairs.length - 1; i++) {
-                            if (parsedEmployee.setM_MapEntry(Map.entry(internalMapKeyValuePairs[i], BigDecimal.valueOf(Double.parseDouble(internalMapKeyValuePairs[i + 1]))))) {
+                            if (parsedEmployee.setM_MapEntry(Map.entry(internalMapKeyValuePairs[i], (int) Double.parseDouble(internalMapKeyValuePairs[i + 1])))) {
                                 System.out.println("Replaced previous value bound to key");
                             } else {
                                 System.out.println("Addition of New Key");
@@ -131,7 +130,7 @@ public class TestCSVFormatting {
                     System.out.println(Arrays.stream(internalMapKeyValuePairs).toList().toString());
                     if (internalMapKeyValuePairs.length != 0) {
                         for (int i = 0; i < internalMapKeyValuePairs.length - 1; i++) {
-                            if (dummyManager.setM_MapEntry(Map.entry(internalMapKeyValuePairs[i], BigDecimal.valueOf(Double.parseDouble(internalMapKeyValuePairs[i + 1]))))) {
+                            if (dummyManager.setM_MapEntry(Map.entry(internalMapKeyValuePairs[i], (int) Double.parseDouble(internalMapKeyValuePairs[i + 1])))) {
                                 System.out.println("Replaced previous value bound to key");
                             } else {
                                 System.out.println("Addition of New Key");
@@ -160,8 +159,8 @@ public class TestCSVFormatting {
 
 
         //? lets generate a new CSV File
-        File results = new File ("RolDePagos/results.csv");
-        try (PrintWriter printWriter = new PrintWriter("RolDePagos/results.csv"))
+        File results = new File ("RolDePagos/empleadosPrueba.csv");
+        try (PrintWriter printWriter = new PrintWriter("RolDePagos/empleadosPrueba.csv"))
         {
 
             Employee employee1 = new Employee("Luis", "Arellano", 1,

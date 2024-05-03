@@ -4,20 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SalaryCalculations/MoneyPresentationHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToSalaryReport.java" afterDir="false" />
+    <list default="true" id="222885f3-1af5-4265-810f-cbfcb5a5edb7" name="Changes" comment="Final Commit.&#10;&#10;Project has been finished, despite the setbacks, the difficulties and how utterly massive the codebase has become, the project is finished and ready for presentation. All the methos work, all functionality for exporting and importing works, visualization of data, addition of data, modifcation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/empleadosPrueba.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EmployeeAbstraction/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/Results.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/results.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RolDePagos/RolDePagosView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RolDePagos/results.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SalaryCalculations/MonthlySalaryHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SalaryCalculations/MonthlySalaryHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToBinarySerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToBinarySerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToCSVSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToJsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToJsonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToSalaryReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToSalaryReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Serialization/ToXMLSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serialization/ToXMLSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestBinarySerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestBinarySerialization.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCSVFormatting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestEmployeeAbstraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestEmployeeAbstraction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,49 +91,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MoneyPresentationHelper.executor": "Run",
-    "Application.RolDePagosController.executor": "Run",
-    "Application.RolDePagosView.executor": "Run",
-    "Application.TestBinarySerialization.executor": "Run",
-    "Application.TestCSVFormatting.executor": "Run",
-    "Application.TestEmployeeAbstraction.executor": "Run",
-    "JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar.executor": "Run",
-    "Java Scratch.Scratch.executor": "Run",
-    "Maven.RolDePagosMain [clean].executor": "Run",
-    "Maven.RolDePagosMain [deploy].executor": "Run",
-    "OverrideImplement.generate.javadoc": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "DevelopmentBranch",
-    "go.import.settings.migrated": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/santi/AppData/Local/SceneBuilder/SceneBuilder.exe",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.56436783",
-    "settings.editor.selected.configurable": "settings.json.schema",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MoneyPresentationHelper.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RolDePagosController.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RolDePagosView.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestBinarySerialization.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestCSVFormatting.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestEmployeeAbstraction.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.RolDePagosMain-1.0-SNAPSHOT.jar.executor&quot;: &quot;Run&quot;,
+    &quot;Java Scratch.Scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.RolDePagosMain [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.RolDePagosMain [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DevelopmentBranch&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/santi/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.56436783&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Markdown",
-      "JAVA",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Markdown&quot;,
+      &quot;JAVA&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\santi\OneDrive - Universidad San Francisco de Quito\FOURTH SEMESTER\CMP-2103 #Apps Programming In Java # Fausto Pasmay\JavaProgramming\Homework\CMP-2103-Rol-de-Pagos\RolDePagosMain\src\main\java\RolDePagos" />
@@ -206,9 +209,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.RolDePagosView" />
+        <item itemvalue="Application.TestBinarySerialization" />
         <item itemvalue="Application.MoneyPresentationHelper" />
         <item itemvalue="Application.TestCSVFormatting" />
-        <item itemvalue="Application.TestBinarySerialization" />
         <item itemvalue="Application.RolDePagosController" />
       </list>
     </recent_temporary>
@@ -238,7 +241,10 @@
       <workItem from="1714328321707" duration="343000" />
       <workItem from="1714341532059" duration="395000" />
       <workItem from="1714342091077" duration="14463000" />
-      <workItem from="1714601028502" duration="19993000" />
+      <workItem from="1714601028502" duration="24267000" />
+      <workItem from="1714705907561" duration="1446000" />
+      <workItem from="1714707433507" duration="440000" />
+      <workItem from="1714707988244" duration="5259000" />
     </task>
     <task id="LOCAL-00001" summary="[Commit #1] [Santiago Arellano] [main Branch]&#10;&#10;Included All Work Folders, Class, File Structures, Headers, And Maven Dependencies">
       <option name="closed" value="true" />
@@ -288,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714358867493</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add new functionality and enhance UI&#10;&#10;Implemented new data import/export functionality in various formats like Binary, CSV, XML, JSON. The listView has also been updated to handle Manager objects and general UI improvements have been applied. Some exceptions and bugs have also been fixed.">
+      <option name="closed" value="true" />
+      <created>1714621338155</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1714621338155</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,7 +316,9 @@
     <MESSAGE value="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit includes advances both in the logical backend development as well as in the visual frontend development aspects. For starters, the application front end has been structured and two out of three panes have already been completed, the last to complete involves exports methods and frankly I've been working for 8 hours so Im tired. But the main adding, removing have been worked out completely. The main misssing component is the edit a record functionality which wont take much of tomorrow to Finish. Aside from this fact, the main functionality, sorting methods and UI are working flawlessly, capable of constant update and expansion upon its basic functionality" />
     <MESSAGE value="[Development Branch] [Code Changes] [Major Changes] [Santiago Arellano]&#10;&#10;The present commit updates and finishes the work needed for a presentable edit and generation of an employee window in the application. It can handle, adding, deleting, editing, reviewing, and sorting employees within separate lists which create a rich UI for the user needs." />
     <MESSAGE value="[Development Branch][Bug Fixes And Changes] [Santiago Arellano]&#10;&#10;The present commit, brings changes into most of the backend for the application. All the serialization methods have been written, tested, and are awaiting connection with the UI once the salary calculation methods have been polished and the field constants that will be used are done. Changes into the way most classes hold the data for the Secondary Title that an employee can hold has been altered in the Manager class. The introduction of three new constants has allowed for a streamlined environment which will guarantee a correct input, output, display and modification of data through the UI and the serialized versions of the EmployeeListWrapper.&#10;&#10;For the JSON serialization method, while constant data members with the names of the fields have not been added, they remain constant through both manager and employee instances. The only difference is the Key that points to the entire collection of data (This key could be Manager or Employee but not both). For XML, the structure has been defined polymorphic throughout the codebase for the EmployeeAbstraction package. This allows for serialization of both classes inside the same file, and deserialization from the same file. &#10;&#10;In terms of CSV serialization, a more robust check for the Titulo of Manager has been added, serialization is more standard using the aforementioned constants as well as the toCSVString() methods defined in the EmployeeAbstraction package classes. Finally, as for Binary, both serialization and deserialization have been added and work flawlessly given their integration with the Serializable Annotation interface. &#10;&#10;Overall functionality can be guaranteed. However, cohesion with the Ui cannot be guaranteed at this time as the methods, most important ones, have not been developed yet, as such, most of the integration with the TableViews, sorting, editing, and filtering have not been developed as of yet.&#10;Tested-by: Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Development Branch][Bug Fixes And Changes] [Santiago Arellano]&#10;&#10;The present commit, brings changes into most of the backend for the application. All the serialization methods have been written, tested, and are awaiting connection with the UI once the salary calculation methods have been polished and the field constants that will be used are done. Changes into the way most classes hold the data for the Secondary Title that an employee can hold has been altered in the Manager class. The introduction of three new constants has allowed for a streamlined environment which will guarantee a correct input, output, display and modification of data through the UI and the serialized versions of the EmployeeListWrapper.&#10;&#10;For the JSON serialization method, while constant data members with the names of the fields have not been added, they remain constant through both manager and employee instances. The only difference is the Key that points to the entire collection of data (This key could be Manager or Employee but not both). For XML, the structure has been defined polymorphic throughout the codebase for the EmployeeAbstraction package. This allows for serialization of both classes inside the same file, and deserialization from the same file. &#10;&#10;In terms of CSV serialization, a more robust check for the Titulo of Manager has been added, serialization is more standard using the aforementioned constants as well as the toCSVString() methods defined in the EmployeeAbstraction package classes. Finally, as for Binary, both serialization and deserialization have been added and work flawlessly given their integration with the Serializable Annotation interface. &#10;&#10;Overall functionality can be guaranteed. However, cohesion with the Ui cannot be guaranteed at this time as the methods, most important ones, have not been developed yet, as such, most of the integration with the TableViews, sorting, editing, and filtering have not been developed as of yet.&#10;Tested-by: Santiago Arellano &lt;santiagofarellanoj@icloud.com&gt;" />
+    <MESSAGE value="[Development Branch][Major Changes] [Santiago Arellano]&#10;&#10;" />
+    <MESSAGE value="Add new functionality and enhance UI&#10;&#10;Implemented new data import/export functionality in various formats like Binary, CSV, XML, JSON. The listView has also been updated to handle Manager objects and general UI improvements have been applied. Some exceptions and bugs have also been fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new functionality and enhance UI&#10;&#10;Implemented new data import/export functionality in various formats like Binary, CSV, XML, JSON. The listView has also been updated to handle Manager objects and general UI improvements have been applied. Some exceptions and bugs have also been fixed." />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>

@@ -9,13 +9,13 @@ package EmployeeAbstraction;
 
 /*? Directivas de Preprocesamiento*/
 import SalaryCalculations.MoneyPresentationHelper;
+import SalaryCalculations.MonthlySalaryHelper;
 
 import javax.naming.directory.InvalidAttributeValueException;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
@@ -68,7 +68,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * Mapa representativo de los rubros involucrados en el sueldo del trabajador, desgloces por ingreso adicional
      */
     @XmlElement(name = "DesgloceSalarial")
-    private Map<String, BigDecimal> m_DesgloceSalarioEmployee = new HashMap<>();
+    private Map<String, Integer> m_DesgloceSalarioEmployee = new HashMap<>();
 
     /**
      * Long representativa de la fecha en format numerico estandar del Empleado a Registrar.
@@ -89,6 +89,9 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
     @XmlTransient
     private static final Date maxHiringDate = Date.from(Instant.now());
 
+    /**
+     * Instancia de la clase Map que permite almacenar internamente el desglose salarial del empleado.
+     */
     @XmlTransient
     private Map<String, Integer> M_desgloseSalarial = null;
 
@@ -329,7 +332,6 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         if (e_SueldoEmpleado >= 800 && e_SueldoEmpleado <= 3500)
         {
             Employee.this.m_sueldoEmployee = e_SueldoEmpleado;
-            this.M_desgloseSalarial = MoneyPresentationHelper.calculateBills(e_SueldoEmpleado);
             return true;
         }
         else
@@ -369,7 +371,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      *         Retorna verdadero si la clave ya existia en el mapa (por lo tanto, el valor fue actualizado),
      *         y falso si la clave no existia en el mapa (por lo tanto, se inserto una nueva entrada en el mapa).
      */
-    public boolean setM_MapEntry(Map.Entry<String, BigDecimal> e_MapEntry)
+    public boolean setM_MapEntry(Map.Entry<String, Integer> e_MapEntry)
 
     {
         if (this.m_DesgloceSalarioEmployee.containsKey(e_MapEntry.getKey()))
@@ -383,7 +385,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
             return false;
         }
     }
-    public BigDecimal getM_MapEntry(String e_Key)
+    public Integer getM_MapEntry(String e_Key)
     {
         return this.m_DesgloceSalarioEmployee.get(e_Key);
     }
@@ -407,12 +409,28 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
 
 
     //?Metodo para retornar un valor contenido dentro del arreglo para desglose salarial
+
+    /**
+     * Metodo que sirve para retornar el valor asignado a una cierta llave del Mapa interno de desglose salarial.
+     * @param key : Una {@code String} representativa de la llave a buscar.
+     * @return : Un {@code Integer} representativo del valor asignado a la llave
+     */
     public Integer getM_DesgloseData(String key) {return this.M_desgloseSalarial.get(key);}
 
     //? Metodo Para retornar sueldo mensual entero
+
+    /**
+     * Un metodo que permite retornar el salario mensual del empleado, basado en el salario total anual ingresado.
+     * @return : Un {@code @Integer} representativo del sueldo salarial mensual en formato entero
+     */
     public Integer getM_SueldoMensual() {return Integer.valueOf(Math.round(this.getM_sueldoEmployee()) / 12);}
 
     //? metodo para retornar sueldo en texto
+
+    /**
+     * Un metodo que permite obtener el salario total del empleado en forma de Texto para Exportacion de datos.
+     * @return : Un {@code String} representativa del suelo del empleado en formato de texto en espanol.
+     */
     public String getM_SueldoTexto() {return MoneyPresentationHelper.transformMoneyToText(this.getM_sueldoEmployee());}
     //? Procedemos a Implementar el Metodo to String
     /**
@@ -549,7 +567,11 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
         CSVrepresentation.append(this.getM_codigoEmployee()).append(",");
         CSVrepresentation.append(this.getM_fechaContratacionEmployee()).append(",");
         CSVrepresentation.append(this.getM_sueldoEmployee()).append(",");
-        CSVrepresentation.append(this.m_DesgloceSalarioEmployee.toString());
+        CSVrepresentation.append(String.format("{%s=%s;%s=%s;%s=%s;%s=%s;%s=%s}", "AporteIESS",this.getM_MapEntry("AporteIESS"),
+                "AporteRenta", this.getM_MapEntry("AporteRenta"),
+                "AporteFondoReserva", this.getM_MapEntry("AporteFondoReserva"),
+                "AporteDecimoTercero", this.getM_MapEntry("AporteDecimoTercero"),
+                "AporteDecimoCuarto", this.getM_MapEntry("AporteDecimoCuarto")));
         return CSVrepresentation.toString();
     }
 

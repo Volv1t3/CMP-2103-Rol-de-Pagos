@@ -51,6 +51,10 @@ public class ToBinarySerializer {
     public static boolean serializeToBinary(File e_OutputFile, EmployeeListWrapper e_EmployeesToSerialize)
             throws FileNotFoundAlert, IOException, IllegalStateException
     {
+        try{
+            if (!e_OutputFile.exists()) {e_OutputFile.createNewFile();}
+        }
+        catch (IOException e) {throw new RuntimeException(e);}
         //? Paso Base: Creamos dos estructuras, fileOutputStream y Object Output Stream
         try (FileOutputStream fos = new FileOutputStream(e_OutputFile);
              ObjectOutputStream oos = new ObjectOutputStream(fos)){

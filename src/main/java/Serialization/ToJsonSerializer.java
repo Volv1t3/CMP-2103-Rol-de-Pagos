@@ -14,9 +14,11 @@ import EmployeeAbstraction.Manager;
 import org.json.simple.*;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Map;
 
 
 public class ToJsonSerializer {
@@ -43,6 +45,18 @@ public class ToJsonSerializer {
     public static boolean serializeToFile(File e_OutputFile, EmployeeListWrapper e_EmployeeList)
             throws FileNotFoundAlert, IllegalArgumentException
     {
+        try
+        {
+            if (!e_OutputFile.exists())
+            {
+                e_OutputFile.createNewFile();
+            }
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
         try (PrintWriter printWriter = new PrintWriter(e_OutputFile))
         {
             if (e_EmployeeList != null)
@@ -101,7 +115,7 @@ public class ToJsonSerializer {
      *   una instancia de un Empleado o de un Manager, dependiendo de las claves en el objeto. </li>
      *   <li> Si el objeto no tiene ninguna de las claves esperadas, se lanza una IllegalStateException -
      *   esto implica que los datos en el archivo no tienen el formato correcto para esta aplicacion. </li>
-     *   <li> Si todo es exitoso, se retorna un objeto EmployeeListWrapper conteniente todos los empleados extraidos. </li>
+     *   <li> Si _todo es exitoso, se retorna un objeto EmployeeListWrapper conteniente todos los empleados extraidos. </li>
      * </ul>
      * <p> Este metodo puede arrojar las siguientes excepciones, las cuales deben ser manejadas de manera externa: </p>
      * <ul>
@@ -149,7 +163,12 @@ public class ToJsonSerializer {
                             JsonObject internalSalaryHolder = (JsonObject) maybeEmployee.get("DesgloseSalarioEmpleado");
                             if (!(internalSalaryHolder.isEmpty()))
                             {
-                                //TODO: Necesitamos las Keys con las que se van a guardar los valores de los sueldos, sin esos metodos no puedo avanzar aqui
+                                abstractEmployee.setM_MapEntry(Map.entry("AporteIESS", ((BigDecimal) internalSalaryHolder.get("AporteIESS")).intValue()));
+                                abstractEmployee.setM_MapEntry(Map.entry("AporteRenta", ((BigDecimal) internalSalaryHolder.get("AporteRenta")).intValue()));
+                                abstractEmployee.setM_MapEntry(Map.entry("AporteFondoReserva", ((BigDecimal) internalSalaryHolder.get("AporteFondoReserva")).intValue()));
+                                abstractEmployee.setM_MapEntry(Map.entry("AporteDecimoTercero", ((BigDecimal) internalSalaryHolder.get("AporteDecimoTercero")).intValue()));
+                                abstractEmployee.setM_MapEntry(Map.entry("AporteDecimoCuarto", ((BigDecimal) internalSalaryHolder.get("AporteDecimoCuarto")).intValue()));
+
                             }
                             results.getM_employees().add(abstractEmployee);
                         }
@@ -165,7 +184,11 @@ public class ToJsonSerializer {
                             JsonObject internalSalaryHolder = (JsonObject) maybeManager.get("DesgloseSalarioEmpleado");
                             if (!(internalSalaryHolder.isEmpty()))
                             {
-                                //TODO: Necesitamos las Keys con las que se van a guardar los valores de los sueldos, sin esos metodos no puedo avanzar aqui
+                                abstractManager.setM_MapEntry(Map.entry("AporteIESS", ((BigDecimal) internalSalaryHolder.get("AporteIESS")).intValue()));
+                                abstractManager.setM_MapEntry(Map.entry("AporteRenta", ((BigDecimal) internalSalaryHolder.get("AporteRenta")).intValue()));
+                                abstractManager.setM_MapEntry(Map.entry("AporteFondoReserva", ((BigDecimal) internalSalaryHolder.get("AporteFondoReserva")).intValue()));
+                                abstractManager.setM_MapEntry(Map.entry("AporteDecimoTercero", ((BigDecimal) internalSalaryHolder.get("AporteDecimoTercero")).intValue()));
+                                abstractManager.setM_MapEntry(Map.entry("AporteDecimoCuarto", ((BigDecimal) internalSalaryHolder.get("AporteDecimoCuarto")).intValue()));
                             }
                             abstractManager.setM_TituloNivelManager((String) maybeManager.get("TituloNivelEmpleado"));
                             abstractManager.setM_ComisionManager(Float.parseFloat((String)maybeManager.get("ComisionEmpleado")));
@@ -225,7 +248,7 @@ public class ToJsonSerializer {
      * almacenarlo en el objeto JSON del empleado.
      * </p>
      * <p>
-     * Finalmente, todo esto se empaqueta dentro de un objeto JSONObject superior, bajo la clave "Employee".
+     * Finalmente, _todo esto se empaqueta dentro de un objeto JSONObject superior, bajo la clave "Employee".
      * </p><p>
      * En caso de que la cadena de caracteres CSV contenga un numero distinto de campos a los esperados,
      * el metodo lanzara una IllegalArgumentException.
@@ -254,12 +277,12 @@ public class ToJsonSerializer {
                 //? Tal como se hizo para deserializar un archivo en CSV, tenemos que pasar ese mismo arreglo a una serie
                 //? de llaves y valores que se serializen dentro de otro Arreglo interno.
                 JsonObject internalSalaryDesglose = new JsonObject();
-                String[] internalMapKeyValuePairs = strings[5].substring(1, strings[5].length() - 1).split("=");
-                System.out.println(Arrays.stream(internalMapKeyValuePairs).toList().toString());
-                if (internalMapKeyValuePairs.length != 0) {
-                    for (int i = 0; i < internalMapKeyValuePairs.length - 1; i++) {
-                        internalSalaryDesglose.put(internalMapKeyValuePairs[i], internalMapKeyValuePairs[i+1]);
-                    }
+                String[] stringsWithoutSeparator = strings[5].substring(1, strings[5].length() - 1).split(";");
+                for(String desgloseSubItem : stringsWithoutSeparator)
+                {
+                    String[] arrayWithoutBorder = desgloseSubItem.split("=");
+                    internalSalaryDesglose.put(arrayWithoutBorder[0], Integer.parseInt(arrayWithoutBorder[1]));
+
                 }
                 employeeJSON.put("DesgloseSalarioEmpleado", internalSalaryDesglose);
                 //En este momento los campos se acabaron y retornamos el objeto
@@ -276,12 +299,12 @@ public class ToJsonSerializer {
                 managerJSON.put("FechaContratoEmpleado", strings[3]);
                 managerJSON.put("SalarioEmpleado", strings[4]);
                 JsonObject internalSalaryDesglose = new JsonObject();
-                String[] internalMapKeyValuePairs = strings[5].substring(1, strings[5].length() - 1).split("=");
-                System.out.println(Arrays.stream(internalMapKeyValuePairs).toList().toString());
-                if (internalMapKeyValuePairs.length != 0) {
-                    for (int i = 0; i < internalMapKeyValuePairs.length - 1; i++) {
-                        internalSalaryDesglose.put(internalMapKeyValuePairs[i], internalMapKeyValuePairs[i+1]);
-                    }
+                String[] stringsWithoutSeparator = strings[5].substring(1, strings[5].length() - 1).split(";");
+                for(String desgloseSubItem : stringsWithoutSeparator)
+                {
+                    String[] arrayWithoutBorder = desgloseSubItem.split("=");
+                    internalSalaryDesglose.put(arrayWithoutBorder[0], Integer.parseInt(arrayWithoutBorder[1]));
+
                 }
                 managerJSON.put("DesgloseSalarioEmpleado", internalSalaryDesglose);
                 managerJSON.put("TituloNivelEmpleado", strings[6]);

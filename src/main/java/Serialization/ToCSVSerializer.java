@@ -15,6 +15,7 @@ import EmployeeAbstraction.*;
 import javax.naming.directory.InvalidAttributeValueException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.*;
@@ -72,6 +73,17 @@ public class ToCSVSerializer {
             throws
             FileNotFoundAlert, InvalidAttributeValueException,
             FileNotFoundException {
+
+        try
+        {
+            if (!e_OutputFile.exists()) {e_OutputFile.createNewFile();}
+        }
+        catch(IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+
         if ((e_OutputFile.exists()))
         {
             if (!(e_EmployeeList.getM_employees().isEmpty()))
@@ -196,14 +208,13 @@ public class ToCSVSerializer {
                     parsedEmployee.setM_fechaContratacionEmployee(Long.parseLong(strings[3]));
                     parsedEmployee.setM_sueldoEmployee(Float.parseFloat(strings[4]));
 
-                    String[] internalMapKeyValuePairs = strings[5].substring(1, strings[5].length() - 1).split("=");
-                    System.out.println(Arrays.stream(internalMapKeyValuePairs).toList().toString());
-                    if (internalMapKeyValuePairs.length != 0) {
-                        for (int i = 0; i < internalMapKeyValuePairs.length - 1; i++) {
-                            parsedEmployee.setM_MapEntry(
-                                    Map.entry(internalMapKeyValuePairs[i],
-                                            BigDecimal.valueOf(Double.parseDouble(internalMapKeyValuePairs[i + 1]))));
-                        }
+                    String[] stringsWithoutSeparator = strings[5].substring(1, strings[5].length() - 1).split(";");
+                    for(String desgloseSubItem : stringsWithoutSeparator)
+                    {
+                        String[] arrayWithoutBorder = desgloseSubItem.split("=");
+                        parsedEmployee.setM_MapEntry(
+                                Map.entry(arrayWithoutBorder[0], Integer.parseInt(arrayWithoutBorder[1]))
+                        );
                     }
                     return parsedEmployee;
                 }
@@ -215,14 +226,13 @@ public class ToCSVSerializer {
                     dummyManager.setM_fechaContratacionEmployee(Long.parseLong(strings[3]));
                     dummyManager.setM_sueldoEmployee(Float.parseFloat(strings[4]));
 
-                    String[] internalMapKeyValuePairs = strings[5].substring(1, strings[5].length() - 1).split("=");
-                    System.out.println(Arrays.stream(internalMapKeyValuePairs).toList().toString());
-                    if (internalMapKeyValuePairs.length != 0) {
-                        for (int i = 0; i < internalMapKeyValuePairs.length - 1; i++) {
-                            dummyManager.setM_MapEntry(Map.entry(
-                                    internalMapKeyValuePairs[i],
-                                    BigDecimal.valueOf(Double.parseDouble(internalMapKeyValuePairs[i + 1]))));
-                        }
+                    String[] stringsWithoutSeparator = strings[5].substring(1, strings[5].length() - 1).split(";");
+                    for(String desgloseSubItem : stringsWithoutSeparator)
+                    {
+                        String[] arrayWithoutBorder = desgloseSubItem.split("=");
+                        dummyManager.setM_MapEntry(
+                                Map.entry(arrayWithoutBorder[0], Integer.parseInt(arrayWithoutBorder[1]))
+                        );
                     }
                     dummyManager.setM_TituloNivelManager(strings[6]);
                     dummyManager.setM_ComisionManager(Float.parseFloat(strings[7]));
