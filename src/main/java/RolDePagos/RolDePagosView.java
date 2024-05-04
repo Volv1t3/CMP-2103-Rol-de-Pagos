@@ -1,5 +1,12 @@
 package RolDePagos;
 
+/*======================================================================================================================
+ ?                                                     ABOUT
+ * @author         :  Santiago Arellano
+ * @repo           :  CMP2103 - Rol De Pagos
+ * @description    :  Definicion e Implementacion del MainEntryPoint de la aplicacion, controlador visual del sistema.
+ ====================================================================================================================**/
+
 import CustomCellFactories.EmployeeCellFactory;
 import CustomCellFactories.ManagerCellFactory;
 import CustomExceptions.FileIsEmptyAlert;
@@ -126,6 +133,7 @@ public class RolDePagosView extends Application {
         this.selectorMenuItemsEmpleados = (MenuBar) root.lookup("#selectorMenuItemsEmpleados");
         for(Employee em : this.m_WrapperList.getM_employees())
         {
+            MonthlySalaryHelper.addCalculatedEntries(em);
             updateTables(em);
         }
         //? Cargamos dependiendo del tipo de selector

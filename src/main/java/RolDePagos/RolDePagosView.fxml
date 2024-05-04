@@ -505,7 +505,7 @@
                                                 <top>
                                                    <MenuBar fx:id="selectorMenuItemsEmpleados" BorderPane.alignment="CENTER">
                                                      <menus>
-                                                       <Menu fx:id="selectorMenuItemsEmpleados" mnemonicParsing="false" text="Seleccionar Empleado Single Analysis" />
+                                                       <Menu  mnemonicParsing="false" text="Seleccionar Empleado Single Analysis" />
                                                      </menus>
                                                    </MenuBar>
                                                 </top>

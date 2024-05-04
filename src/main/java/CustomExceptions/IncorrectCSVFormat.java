@@ -1,11 +1,16 @@
 package CustomExceptions;
 
+/*======================================================================================================================
+ ?                                                     ABOUT
+ * @author         :  Santiago Arellano
+ * @repo           :  CMP2103 - Rol De Pagos
+ * @description    :  Definicion e Implementacion de la Custom Exception IncorrectCSVFormat, que permite enviar un mensaje
+ *                    dentro del programa para informar de archivos con Formatos CSV incorrectos.
+ ====================================================================================================================**/
+
 public class IncorrectCSVFormat extends Exception{
 
-    //? Internal Variables Dedicated To Directing GUI
-    private final String m_ErrorTitle = "CSV Format Error";
-    private final String m_ErrorHeader = "The CSV Format Parsed Was Incorrect For The Application";
-    private String m_errorContent;
+    private final String m_errorContent;
 
 
     //? Public Constructors
@@ -21,9 +26,11 @@ public class IncorrectCSVFormat extends Exception{
 
     //? Public Getters
 
-    public String getM_ErrorTitle()  {return this.m_ErrorTitle;}
+    public String getM_ErrorTitle()  {//? Internal Variables Dedicated To Directing GUI
+        return "CSV Format Error";}
 
-    public String getM_ErrorHeader() {return this.m_ErrorHeader;}
+    public String getM_ErrorHeader() {
+        return "The CSV Format Parsed Was Incorrect For The Application";}
 
     public String getM_errorContent(){return this.m_errorContent;}
 

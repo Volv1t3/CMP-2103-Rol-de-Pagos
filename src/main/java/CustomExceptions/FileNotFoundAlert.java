@@ -1,13 +1,16 @@
 package CustomExceptions;
 
-import java.io.FileNotFoundException;
+/*======================================================================================================================
+ ?                                                     ABOUT
+ * @author         :  Santiago Arellano
+ * @repo           :  CMP2103 - Rol De Pagos
+ * @description    :  Definicion e Implementacion de la Custom Exception FileNotFoundAlert, que permite enviar un mensaje
+ *                    dentro del programa para informar de archivos que no pudieron ser abiertos en el sistema.
+ ====================================================================================================================**/
 
 public class FileNotFoundAlert extends Exception{
 
-    //? Internal Variables Dedicated To Directing GUI
-    private final String m_ErrorTitle = "The Processed File Has Not Been Opened Correctly";
-    private final String m_ErrorHeader = "File Not Found Error";
-    private String m_errorContent;
+    private final String m_errorContent;
 
 
     //? Public Constructors
@@ -23,9 +26,11 @@ public class FileNotFoundAlert extends Exception{
 
     //? Public Getters
 
-    public String getM_ErrorTitle()  {return this.m_ErrorTitle;}
+    public String getM_ErrorTitle()  {//? Internal Variables Dedicated To Directing GUI
+        return "The Processed File Has Not Been Opened Correctly";}
 
-    public String getM_ErrorHeader() {return this.m_ErrorHeader;}
+    public String getM_ErrorHeader() {
+        return "File Not Found Error";}
 
     public String getM_errorContent(){return this.m_errorContent;}
 

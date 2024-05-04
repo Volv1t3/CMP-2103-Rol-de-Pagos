@@ -2,7 +2,7 @@ package RolDePagos;
 
 /*======================================================================================================================
  ?                                                     ABOUT
- * @author         :  Carlos Villafuerte, Santiago Arellano
+ * @author         :  Santiago Arellano
  * @repo           :  CMP2103 - Rol De Pagos
  * @description    :  Definicion e Implementacion del controlador visual de la Aplicacion Rol De Pagos
  *====================================================================================================================*/
@@ -13,15 +13,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLStreamHandler;
 import java.util.*;
 
 public class RolDePagosController {

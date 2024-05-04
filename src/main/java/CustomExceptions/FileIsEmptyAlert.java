@@ -1,11 +1,16 @@
 package CustomExceptions;
 
+/*======================================================================================================================
+ ?                                                     ABOUT
+ * @author         :  Santiago Arellano
+ * @repo           :  CMP2103 - Rol De Pagos
+ * @description    :  Definicion e Implementacion de la Custom Exception FileIsEmptyAlert, que permite enviar un mensaje
+ *                    dentro del programa para informar de archivos vacios.
+ ====================================================================================================================**/
+
 public class FileIsEmptyAlert extends Exception{
 
-    //? Internal Variables Dedicated To Directing GUI
-    private final String m_ErrorTitle = "The Processed File Is Empty";
-    private final String m_ErrorHeader = "File Is Empty Error";
-    private String m_errorContent;
+    private final String m_errorContent;
 
 
     //? Public Constructors
@@ -21,9 +26,11 @@ public class FileIsEmptyAlert extends Exception{
 
     //? Public Getters
 
-    public String getM_ErrorTitle()  {return this.m_ErrorTitle;}
+    public String getM_ErrorTitle()  {//? Internal Variables Dedicated To Directing GUI
+        return "The Processed File Is Empty";}
 
-    public String getM_ErrorHeader() {return this.m_ErrorHeader;}
+    public String getM_ErrorHeader() {
+        return "File Is Empty Error";}
 
     public String getM_errorContent(){return this.m_errorContent;}
 

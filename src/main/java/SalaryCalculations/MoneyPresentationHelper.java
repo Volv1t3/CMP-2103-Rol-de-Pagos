@@ -2,10 +2,11 @@ package SalaryCalculations;
 
 /*======================================================================================================================
  ?                                                     ABOUT
- * @author         :  Carlos Villafuerte, Santiago Arellano
+ * @author         :  Santiago Arellano
  * @repo           :  CMP2103 - Rol De Pagos
- * @description    :  Implementacion Clase Auxiliar
- *====================================================================================================================*/
+ * @description    :  Definicion e Implementacion de la clase Helper para presentacion textual y en desglose de billetes
+ *                    del sueldo de un empleado
+======================================================================================================================*/
 
 import java.math.BigInteger;
 import java.util.Map;

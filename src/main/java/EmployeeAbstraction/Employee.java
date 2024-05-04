@@ -2,7 +2,7 @@ package EmployeeAbstraction;
 
 /*======================================================================================================================
  ?                                                     ABOUT
- * @author         :  Carlos Villafuerte, Santiago Arellano
+ * @author         :  Santiago Arellano
  * @repo           :  CMP2103 - Rol De Pagos
  * @description    :  Definicion e Implementacion de la Clase Base Employee
  *===================================================================================================================**/
@@ -108,6 +108,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
 
 
     //* Constructor con valores requerido por JavaFX para componentes visuales y UI
+
     /**
      * Este es un constructor que se utiliza para crear un objeto de la clase Empleado con valores específicos.
      *
@@ -423,7 +424,8 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * Un metodo que permite retornar el salario mensual del empleado, basado en el salario total anual ingresado.
      * @return : Un {@code @Integer} representativo del sueldo salarial mensual en formato entero
      */
-    public Integer getM_SueldoMensual() {return Integer.valueOf(Math.round(this.getM_sueldoEmployee()) / 12);}
+    public Integer getM_SueldoMensual() {return
+            (int) (this.getM_sueldoEmployee() - this.getM_MapEntry("AporteIESS") - this.getM_MapEntry("AporteFondoReserva"));}
 
     //? metodo para retornar sueldo en texto
 

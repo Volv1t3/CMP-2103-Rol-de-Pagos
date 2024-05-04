@@ -1,5 +1,12 @@
 package CustomCellFactories;
 
+/*======================================================================================================================
+ ?                                                     ABOUT
+ * @author         :  Santiago Arellano
+ * @repo           :  CMP2103 - Rol De Pagos
+ * @description    :  Definicion e Implementacion de la Clase ManagerCellFactory para mostrar managers en listViews
+ ====================================================================================================================**/
+
 import EmployeeAbstraction.Employee;
 import EmployeeAbstraction.Manager;
 import javafx.geometry.HPos;
@@ -24,16 +31,10 @@ public class ManagerCellFactory extends ListCell<Employee> {
         this.m_GridPaneHolder = new GridPane(50,10);
         this.m_GridPaneHolder.setAlignment(Pos.CENTER);
     }
-    /**
-     *
-     * @param item The new item for the cell.
-     * @param empty whether or not this cell represents data from the list. If it
-     *        is empty, then it does not represent any domain data, but is a cell
-     *        being used to render an "empty" row.
-     */
+
     @Override
     protected void updateItem(Employee item, boolean empty) {
-        //? first thing First, let us clear the original holder
+        //? Limpiamos Holder Original
         super.updateItem(item, empty);
         this.m_GridPaneHolder.getChildren().clear();
 
@@ -44,7 +45,7 @@ public class ManagerCellFactory extends ListCell<Employee> {
             String[] strings = item.toCSVString().split(",");
             if (strings.length == 8) {
                 int counter = 0;
-                //? Create the First Row of Items For the Employee, We need ID, Name, LName, Salary, Hire Date
+                //? Creamos la primera fila con los campos que se van a colocar
                 Label idLabel = new Label("ID Empleado");
                 Label nameLabel = new Label("Nombre Empleado");
                 Label lNameLabel = new Label("Apellido Empleado");
@@ -69,7 +70,7 @@ public class ManagerCellFactory extends ListCell<Employee> {
                     GridPane.setValignment(this.m_GridPaneHolder.getChildren().get(counter), VPos.CENTER);
                 }
 
-                //? Create the Second row containing the actual values
+                //? Creamos la segunda fila con los campos extraidos del manager
                 Label nameValue = new Label(strings[0]);
                 Label lNameValue = new Label(strings[1]);
                 Label idValue = new Label(String.valueOf(strings[2]));

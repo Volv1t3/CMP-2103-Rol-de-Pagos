@@ -2,7 +2,7 @@ package Serialization;
 
 /*======================================================================================================================
  ?                                                     ABOUT
- * @author         :  Carlos Villafuerte, Santiago Arellano
+ * @author         :  Santiago Arellano
  * @repo           :  CMP2103 - Rol De Pagos
  * @description    :  Implementacion de Clase Auxiliar de Serializacion Por JSON
  *====================================================================================================================*/
@@ -53,7 +53,7 @@ public class ToSalaryReport {
 
                     pt.printf("%-15s %-20s %-20s %-20s %-20s %-20s %-10s %-10s %-10s %-10s %-50s%n",
                             empleado.getM_codigoEmployee(), empleado.getM_nombreEmployee(), empleado.getM_apellidoEmployee(),
-                            empleado.getM_sueldoEmployee(), Math.round(empleado.getM_sueldoEmployee() / 12), "Desglose:",
+                            empleado.getM_sueldoEmployee(), empleado.getM_SueldoMensual(), "Desglose:",
                             salarioDesplose.get("20"), salarioDesplose.get("10"), salarioDesplose.get("5"), salarioDesplose.get("1"),
                             MoneyPresentationHelper.transformMoneyToText(empleado.getM_sueldoEmployee()));
                 }

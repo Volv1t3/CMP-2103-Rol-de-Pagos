@@ -1,10 +1,11 @@
 package SalaryCalculations;
 /*======================================================================================================================
  ?                                                     ABOUT
- * @author         :  Carlos Villafuerte, Santiago Arellano
+ * @author         :  Santiago Arellano
  * @repo           :  CMP2103 - Rol De Pagos
- * @description    :  Implementacion de Clase Auxiliar Para Calculo de Salario Mensual
- *====================================================================================================================*/
+ * @description    :  Definicion e Implementacion de la clase Helper para aportes salariales del empleador al SRI en
+ *                    base al salario del empleado
+ =====================================================================================================================*/
 
 import EmployeeAbstraction.Employee;
 
@@ -49,50 +50,52 @@ public class MonthlySalaryHelper {
      */
     private static Map.Entry<String, Integer> porcentajeRetencionImpuestoRenta(Float e_IngresosTotalesEmpleado)
     {
+        Float ingresosTotalesAnuales = BigDecimal.valueOf(e_IngresosTotalesEmpleado).multiply(BigDecimal.valueOf(12)).floatValue();
+
         BigDecimal retencionCalculada = BigDecimal.valueOf(0f);
-        if (0f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 11722f) {retencionCalculada.add(BigDecimal.valueOf(0));}
-        else if (11722f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 14930f) {
+        if (0f < ingresosTotalesAnuales && ingresosTotalesAnuales < 11722f) {retencionCalculada.add(BigDecimal.valueOf(0));}
+        else if (11722f < ingresosTotalesAnuales && ingresosTotalesAnuales < 14930f) {
             retencionCalculada = retencionCalculada.add(
-                    BigDecimal.valueOf(e_IngresosTotalesEmpleado).multiply(BigDecimal.valueOf(0.05)));}
-        else if (14930f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 25638f)
+                    BigDecimal.valueOf(ingresosTotalesAnuales).multiply(BigDecimal.valueOf(0.05)));}
+        else if (14930f < ingresosTotalesAnuales && ingresosTotalesAnuales < 25638f)
         {
-            retencionCalculada = retencionCalculada.add(BigDecimal.valueOf(e_IngresosTotalesEmpleado).
+            retencionCalculada = retencionCalculada.add(BigDecimal.valueOf(ingresosTotalesAnuales).
                     subtract(BigDecimal.valueOf(160f)).
                     multiply(BigDecimal.valueOf(0.05)));
         }
-        else if (25638f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 33738f)
+        else if (25638f < ingresosTotalesAnuales && ingresosTotalesAnuales < 33738f)
         {
-            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(e_IngresosTotalesEmpleado).
+            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(ingresosTotalesAnuales).
                     subtract(BigDecimal.valueOf(606f)).
                     multiply(BigDecimal.valueOf(0.10)));
         }
-        else if (33738f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 44721f)
+        else if (33738f < ingresosTotalesAnuales && ingresosTotalesAnuales < 44721f)
         {
-            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(e_IngresosTotalesEmpleado).
+            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(ingresosTotalesAnuales).
                     subtract(BigDecimal.valueOf(1356f)).
                     multiply(BigDecimal.valueOf(0.12)));
         }
-        else if (44721f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 59537f)
+        else if (44721f < ingresosTotalesAnuales && ingresosTotalesAnuales < 59537f)
         {
-            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(e_IngresosTotalesEmpleado).
+            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(ingresosTotalesAnuales).
                     subtract(BigDecimal.valueOf(2571f)).
                     multiply(BigDecimal.valueOf(0.20)));
         }
-        else if (59537f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 79338f)
+        else if (59537f < ingresosTotalesAnuales && ingresosTotalesAnuales < 79338f)
         {
-            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(e_IngresosTotalesEmpleado).
+            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(ingresosTotalesAnuales).
                     subtract(BigDecimal.valueOf(4768f)).
                     multiply(BigDecimal.valueOf(0.25)));
         }
-        else if (79338f < e_IngresosTotalesEmpleado && e_IngresosTotalesEmpleado < 105580f)
+        else if (79338f < ingresosTotalesAnuales && ingresosTotalesAnuales < 105580f)
         {
-            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(e_IngresosTotalesEmpleado).
+            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(ingresosTotalesAnuales).
                     subtract(BigDecimal.valueOf(14427f)).
                     multiply(BigDecimal.valueOf(0.35)));
         }
         else if ( 105580f < e_IngresosTotalesEmpleado)
         {
-            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(e_IngresosTotalesEmpleado).
+            retencionCalculada= retencionCalculada.add(BigDecimal.valueOf(ingresosTotalesAnuales).
                     subtract(BigDecimal.valueOf(23594f)).
                     multiply(BigDecimal.valueOf(0.37)));
         }
