@@ -1143,6 +1143,8 @@ public class RolDePagosView extends Application {
                 this.mListViewColaboradores.refresh();
                 this.mListVIewColaboradoresManagers.refresh();
                 updateIESSTable(this.m_WrapperList.getM_employees());
+                this.selectorMenuItemsEmpleados.getMenus().getFirst().getItems().clear();
+                this.tableDesgloseSalario.getItems().clear();
             }
         });
         //? Carga de Datos Binario
@@ -1678,6 +1680,7 @@ public class RolDePagosView extends Application {
     private void extracted() {
         this.m_WrapperList.getM_employees().forEach(employee ->
         {
+            updateTables(employee);
             if(employee.toCSVString().split(",").length == 8)
             {
                 this.ManagerHolder.add(employee);

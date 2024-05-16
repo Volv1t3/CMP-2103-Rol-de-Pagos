@@ -433,7 +433,7 @@ public class Employee implements Comparator<Employee>, Comparable<Employee>, Ser
      * Un metodo que permite obtener el salario total del empleado en forma de Texto para Exportacion de datos.
      * @return : Un {@code String} representativa del suelo del empleado en formato de texto en espanol.
      */
-    public String getM_SueldoTexto() {return MoneyPresentationHelper.transformMoneyToText(this.getM_sueldoEmployee());}
+    public String getM_SueldoTexto() {return MoneyPresentationHelper.transformMoneyToText(Float.valueOf(this.getM_SueldoMensual()));}
     //? Procedemos a Implementar el Metodo to String
     /**
      * Este método sobreescribe el método toString y devuelve una representación string de un empleado.
